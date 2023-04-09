@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ContentProperties DeviceType="Desktop">
+  <Component type="ScriptPanel" id="BG" x="0.0" y="0.0" width="900" height="500"
+             opaque="1" borderSize="0.0" borderRadius="0.0" itemColour="4281545523"
+             textColour="4294967295" itemColour2="4280690214">
+    <Component type="ScriptPanel" id="Ruler" x="10.0" y="239.0" width="850.0"
+               height="200" allowCallbacks="All Callbacks" parentComponent="BG"
+               tooltip="Use this ruler to distort the timeline for the dilation process"/>
+    <Component type="ScriptAudioWaveform" id="OriginalWaveform" x="10.0" y="282.0"
+               width="850.0" height="160.0" bgColour="5592405" processorId="Original"
+               opaque="0" itemColour2="567069900" itemColour="4294967295" showFileName="0"
+               enableRange="0" parentComponent="BG" saveInPreset="0" tooltip="The original audio file. Click to play"/>
+    <Component type="ScriptPanel" id="PreviewPanel" x="10.0" y="30.0" width="850.0"
+               height="160.0" parentComponent="BG" tooltip="the preview of the processed audio file. Click to play"
+               allowCallbacks="Clicks &amp; Hover"/>
+    <Component type="ScriptFloatingTile" id="FloatingTile1" x="10.0" y="456.0"
+               parentComponent="BG" ContentType="TooltipPanel" bgColour="4281874488"
+               itemColour="872415231" itemColour2="0" textColour="3439329279"
+               height="24.0" width="790.0" Font="Lato"/>
+  </Component>
+  <Component type="ScriptPanel" id="ZoomPanel" x="876" y="476" width="24"
+             height="24" allowCallbacks="All Callbacks"/>
+  <Component type="ScriptFloatingTile" id="MasterPeak" x="870.0" y="30.0"
+             width="20.0" height="412.0" ContentType="MatrixPeakMeter" bgColour="4278190080"
+             itemColour="4283782485" itemColour2="4280427042" Data="{&#10;  &quot;ProcessorId&quot;: &quot;Loris Toolbox&quot;,&#10;  &quot;Index&quot;: -1,&#10;  &quot;FollowWorkspace&quot;: false,&#10;  &quot;SegmentLedSize&quot;: 2.0,&#10;  &quot;UpDecayTime&quot;: 0.0,&#10;  &quot;DownDecayTime&quot;: 1100.0,&#10;  &quot;UseSourceChannels&quot;: true,&#10;  &quot;SkewFactor&quot;: 0.3499999940395355,&#10;  &quot;PaddingSize&quot;: 1.0,&#10;  &quot;ShowMaxPeak&quot;: 1.0,&#10;  &quot;ChannelIndexes&quot;: [&#10;    0,&#10;    1&#10;  ]&#10;}"/>
+</ContentProperties>
