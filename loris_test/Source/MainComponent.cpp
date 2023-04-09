@@ -31,14 +31,20 @@ MainComponent::MainComponent():
     
     auto currentDir = File::getSpecialLocation(File::SpecialLocationType::currentApplicationFile).getParentDirectory();
     
+    // We'll assume that we've build the library on this machine...
     currentDir = currentDir.getParentDirectory();
     currentDir = currentDir.getParentDirectory();
     currentDir = currentDir.getParentDirectory();
     currentDir = currentDir.getParentDirectory();
     currentDir = currentDir.getParentDirectory();
     
-    
-    DBG(currentDir.getFullPathName());
+#if JUCE_MAC
+#if JUCE_DEBUG
+    currentDir = currentDir.getChildFile("loris_library/Builds/MacOSX/build/Debug");
+#else
+    currentDir = currentDir.getChildFile("loris_library/Builds/MacOSX/build/Release");
+#endif
+#endif
     
     lorisManager = new LorisManager(currentDir, [&](String error_)
     {
