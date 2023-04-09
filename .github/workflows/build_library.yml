@@ -1,0 +1,26 @@
+name: Build Installer
+on: 
+  workflow_dispatch:
+  #push:
+   # branches: 
+    #  - master
+    #tags:
+     # - '*'
+jobs:
+  build_loris_library_macos:
+    runs-on: [self-hosted, macos]
+    steps:
+      - name: Cleanup working directory
+        run: rm -rf "${{github.workspace}}" 
+      - name: Checkout loris repository
+        uses: actions/checkout@v1
+        with:
+          ref: 'master'
+      - name: Build Library
+        working-directory: ${{ github.workspace }}
+        run: sh build_library.sh
+      - name: Upload Installer
+        uses: actions/upload-artifact@v2
+        with:
+          name: Loris Dynamic Library macOS
+          path: ${{ github.workspace }}/*.zip
