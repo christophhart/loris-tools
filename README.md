@@ -1,5 +1,7 @@
 # loris-tools
 
+[![Loris Library Build](https://github.com/christophhart/loris-tools/actions/workflows/build_library.yml/badge.svg)](https://github.com/christophhart/loris-tools/actions/workflows/build_library.yml)
+
 A collection of sample analysis tools for HISE based on the Loris library. The [Loris library](http://www.cerlsoundgroup.org/Loris/) allows you resynthesize and morph audio data and is a pretty powerful tool. This repository contains the integration of Loris into [HISE](https://github.com/christophhart/HISE/)! The integration features:
 
 - a prebuild dynamic library (currently only macOS, but Windows & Linux will follow soon)
