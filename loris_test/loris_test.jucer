@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<JUCERPROJECT id="kE8cI1" name="loris_test" projectType="guiapp" useAppConfig="0"
+              addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1" cppLanguageStandard="17">
+  <MAINGROUP id="PmTdXF" name="loris_test">
+    <GROUP id="{B4376E8D-27C4-85AB-402F-EF7A8B43359D}" name="Source">
+      <FILE id="xvWtMA" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
+      <FILE id="NN4PQu" name="MainComponent.h" compile="0" resource="0" file="Source/MainComponent.h"/>
+      <FILE id="UCBHGd" name="MainComponent.cpp" compile="1" resource="0"
+            file="Source/MainComponent.cpp"/>
+    </GROUP>
+    <FILE id="pYEgUp" name="balanceKnob_200.png" compile="0" resource="1"
+          file="balanceKnob_200.png"/>
+    <FILE id="h0VdpO" name="FrontendKnob_Bipolar.png" compile="0" resource="1"
+          file="FrontendKnob_Bipolar.png"/>
+    <FILE id="U22239" name="FrontendKnob_Unipolar.png" compile="0" resource="1"
+          file="FrontendKnob_Unipolar.png"/>
+    <FILE id="QKWvn1" name="infoError.png" compile="0" resource="1" file="infoError.png"/>
+    <FILE id="iPeQlC" name="infoInfo.png" compile="0" resource="1" file="infoInfo.png"/>
+    <FILE id="WYI2Q3" name="infoQuestion.png" compile="0" resource="1"
+          file="infoQuestion.png"/>
+    <FILE id="mWnp7M" name="infoWarning.png" compile="0" resource="1" file="infoWarning.png"/>
+    <FILE id="u5XaqW" name="knob_without_arrow.png" compile="0" resource="1"
+          file="knob_without_arrow.png"/>
+    <FILE id="xh9FkR" name="knobEmpty_200.png" compile="0" resource="1"
+          file="knobEmpty_200.png"/>
+    <FILE id="UKMvnF" name="knobModulated_200.png" compile="0" resource="1"
+          file="knobModulated_200.png"/>
+    <FILE id="pWypFd" name="knobUnmodulated_200.png" compile="0" resource="1"
+          file="knobUnmodulated_200.png"/>
+    <FILE id="jfE8Fm" name="Lato-Bold.ttf" compile="0" resource="1" file="Lato-Bold.ttf"/>
+    <FILE id="nMZnfO" name="Lato-Regular.ttf" compile="0" resource="1"
+          file="Lato-Regular.ttf"/>
+    <FILE id="LBqYZD" name="logo_mini.png" compile="0" resource="1" file="logo_mini.png"/>
+    <FILE id="Zv5bFl" name="logo_new.png" compile="0" resource="1" file="logo_new.png"/>
+    <FILE id="fCXlNo" name="oxygen.bold.ttf" compile="0" resource="1" file="oxygen.bold.ttf"/>
+    <FILE id="esd8HC" name="toggle_200.png" compile="0" resource="1" file="toggle_200.png"/>
+  </MAINGROUP>
+  <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1" HISE_USE_EXTENDED_TEMPO_VALUES="1"
+               HISE_INCLUDE_PITCH_DETECTION="0" HISE_USE_NEW_CODE_EDITOR="0"
+               HISE_INCLUDE_RLOTTIE="0"/>
+  <EXPORTFORMATS>
+    <XCODE_MAC targetFolder="Builds/MacOSX" xcodeValidArchs="x86_64">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug" targetName="loris_test"/>
+        <CONFIGURATION isDebug="0" name="Release" targetName="loris_test"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_core" path="../../../JUCE/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../../../JUCE/modules"/>
+        <MODULEPATH id="juce_events" path="../../../JUCE/modules"/>
+        <MODULEPATH id="juce_graphics" path="../../../JUCE/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_basics" path="../../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../../../JUCE/modules"/>
+        <MODULEPATH id="juce_cryptography" path="../../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="../../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../../../JUCE/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../../../JUCE/modules"/>
+        <MODULEPATH id="hi_tools" path="../../../"/>
+        <MODULEPATH id="hi_rlottie" path="../../../../HISE"/>
+        <MODULEPATH id="juce_dsp" path="../../../JUCE/modules"/>
+        <MODULEPATH id="hi_zstd" path="../../../../HISE"/>
+        <MODULEPATH id="hi_lac" path="../../../../HISE"/>
+      </MODULEPATHS>
+    </XCODE_MAC>
+  </EXPORTFORMATS>
+  <MODULES>
+    <MODULE id="hi_lac" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="hi_rlottie" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="hi_tools" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="hi_zstd" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_devices" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_formats" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_processors" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_utils" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_core" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_cryptography" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_dsp" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_events" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+  </MODULES>
+</JUCERPROJECT>
