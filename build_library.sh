@@ -16,11 +16,11 @@ set -o pipefail
 echo Compiling Loris Dynamic Library...
 
 echo Compile Debug Configuration
-xcodebuild -project "loris_library/Builds/MacOSX/loris_library.xcodeproj" -configuration "Debug" -jobs "6" | xcpretty
+xcodebuild -project ./loris_library/Builds/MacOSX/loris_library.xcodeproj -configuration "Debug" -jobs "6" | xcpretty
 
 echo Compile Release Configuration...
 
-xcodebuild -project "loris_library/Builds/MacOSX/loris_library.xcodeproj" -configuration "Release" -jobs "6" | xcpretty
+xcodebuild -project ./loris_library/Builds/MacOSX/loris_library.xcodeproj -configuration "Release" -jobs "6" | xcpretty
 
 echo Creating Archive...
 zip -X -j loris_library_macOS.zip ./loris_library/Builds/MacOSX/build/Debug/loris_library_debug.dylib ./loris_library/Builds/MacOSX/build/Release/loris_library_release.dylib
