@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<JUCERPROJECT id="ZKT7sP" name="loris_win_lib" projectType="library" useAppConfig="0"
+              addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1" cppLanguageStandard="17">
+  <MAINGROUP id="o7WznW" name="loris_win_lib">
+    <GROUP id="{E80C1FB2-F743-77FA-0C27-D9FFD48C5A2F}" name="Source"/>
+    <GROUP id="{44A3D3CF-A601-2198-A500-AAF059CEDCC8}" name="src">
+      <GROUP id="{B41A7FDD-6FB8-FE72-EC72-63A9645F0365}" name="cpp"/>
+      <FILE id="HdiPT0" name="AiffData.cpp" compile="1" resource="0" file="src/AiffData.cpp"/>
+      <FILE id="PBzBZp" name="AiffData.h" compile="0" resource="0" file="src/AiffData.h"/>
+      <FILE id="vgsEPF" name="AiffFile.cpp" compile="1" resource="0" file="src/AiffFile.cpp"/>
+      <FILE id="olC8qU" name="AiffFile.h" compile="0" resource="0" file="src/AiffFile.h"/>
+      <FILE id="IiNwV0" name="Analyzer.cpp" compile="1" resource="0" file="src/Analyzer.cpp"/>
+      <FILE id="FTLY7x" name="Analyzer.h" compile="0" resource="0" file="src/Analyzer.h"/>
+      <FILE id="NYnRgs" name="AssociateBandwidth.cpp" compile="1" resource="0"
+            file="src/AssociateBandwidth.cpp"/>
+      <FILE id="d9HUmj" name="AssociateBandwidth.h" compile="0" resource="0"
+            file="src/AssociateBandwidth.h"/>
+      <FILE id="dEWVzj" name="BigEndian.cpp" compile="1" resource="0" file="src/BigEndian.cpp"/>
+      <FILE id="AnXJiu" name="BigEndian.h" compile="0" resource="0" file="src/BigEndian.h"/>
+      <FILE id="MSgSP8" name="Breakpoint.cpp" compile="1" resource="0" file="src/Breakpoint.cpp"/>
+      <FILE id="BKFojy" name="Breakpoint.h" compile="0" resource="0" file="src/Breakpoint.h"/>
+      <FILE id="jBmSCX" name="BreakpointEnvelope.h" compile="0" resource="0"
+            file="src/BreakpointEnvelope.h"/>
+      <FILE id="LGcKRf" name="BreakpointUtils.cpp" compile="1" resource="0"
+            file="src/BreakpointUtils.cpp"/>
+      <FILE id="YJH1XB" name="BreakpointUtils.h" compile="0" resource="0"
+            file="src/BreakpointUtils.h"/>
+      <FILE id="J9YIsM" name="Channelizer.cpp" compile="1" resource="0" file="src/Channelizer.cpp"/>
+      <FILE id="wxegX7" name="Channelizer.h" compile="0" resource="0" file="src/Channelizer.h"/>
+      <FILE id="SL37sC" name="Collator.cpp" compile="1" resource="0" file="src/Collator.cpp"/>
+      <FILE id="UpdBKm" name="Collator.h" compile="0" resource="0" file="src/Collator.h"/>
+      <FILE id="hXpIUY" name="Dilator.cpp" compile="1" resource="0" file="src/Dilator.cpp"/>
+      <FILE id="wgBCYl" name="Dilator.h" compile="0" resource="0" file="src/Dilator.h"/>
+      <FILE id="orvWMq" name="Distiller.cpp" compile="1" resource="0" file="src/Distiller.cpp"/>
+      <FILE id="CnxOoz" name="Distiller.h" compile="0" resource="0" file="src/Distiller.h"/>
+      <FILE id="RAfdio" name="Envelope.cpp" compile="1" resource="0" file="src/Envelope.cpp"/>
+      <FILE id="ZqAAXC" name="Envelope.h" compile="0" resource="0" file="src/Envelope.h"/>
+      <FILE id="Dbk5nz" name="Exception.h" compile="0" resource="0" file="src/Exception.h"/>
+      <FILE id="I1ZPwz" name="F0Estimate.cpp" compile="1" resource="0" file="src/F0Estimate.cpp"/>
+      <FILE id="QzxVwY" name="F0Estimate.h" compile="0" resource="0" file="src/F0Estimate.h"/>
+      <FILE id="lDErZd" name="fftsg.cpp" compile="1" resource="0" file="src/fftsg.cpp"/>
+      <FILE id="IenOVq" name="Filter.cpp" compile="1" resource="0" file="src/Filter.cpp"/>
+      <FILE id="hL1N4o" name="Filter.h" compile="0" resource="0" file="src/Filter.h"/>
+      <FILE id="g8JsGe" name="FourierTransform.cpp" compile="1" resource="0"
+            file="src/FourierTransform.cpp"/>
+      <FILE id="bsI5OL" name="FourierTransform.h" compile="0" resource="0"
+            file="src/FourierTransform.h"/>
+      <FILE id="b9znKL" name="FrequencyReference.cpp" compile="1" resource="0"
+            file="src/FrequencyReference.cpp"/>
+      <FILE id="ZjWljd" name="FrequencyReference.h" compile="0" resource="0"
+            file="src/FrequencyReference.h"/>
+      <FILE id="pcZucA" name="Fundamental.cpp" compile="1" resource="0" file="src/Fundamental.cpp"/>
+      <FILE id="pBlSly" name="Fundamental.h" compile="0" resource="0" file="src/Fundamental.h"/>
+      <FILE id="BgwFz2" name="Harmonifier.cpp" compile="1" resource="0" file="src/Harmonifier.cpp"/>
+      <FILE id="G0EAFz" name="Harmonifier.h" compile="0" resource="0" file="src/Harmonifier.h"/>
+      <FILE id="LeWwvo" name="ImportLemur.cpp" compile="1" resource="0" file="src/ImportLemur.cpp"/>
+      <FILE id="bmIPZn" name="ImportLemur.h" compile="0" resource="0" file="src/ImportLemur.h"/>
+      <FILE id="dkPSp5" name="KaiserWindow.cpp" compile="1" resource="0"
+            file="src/KaiserWindow.cpp"/>
+      <FILE id="RmQA3t" name="KaiserWindow.h" compile="0" resource="0" file="src/KaiserWindow.h"/>
+      <FILE id="XHz1di" name="LinearEnvelope.cpp" compile="1" resource="0"
+            file="src/LinearEnvelope.cpp"/>
+      <FILE id="vNDbnH" name="LinearEnvelope.h" compile="0" resource="0"
+            file="src/LinearEnvelope.h"/>
+      <FILE id="ZM2eob" name="loris.h" compile="0" resource="0" file="src/loris.h"/>
+      <FILE id="c6eLHi" name="loris.h.in" compile="0" resource="1" file="src/loris.h.in"/>
+      <FILE id="U2e4Eo" name="lorisAnalyzer_pi.cpp" compile="1" resource="0"
+            file="src/lorisAnalyzer_pi.cpp"/>
+      <FILE id="wvx8mO" name="lorisBpEnvelope_pi.cpp" compile="1" resource="0"
+            file="src/lorisBpEnvelope_pi.cpp"/>
+      <FILE id="m5hpUU" name="lorisException_pi.cpp" compile="1" resource="0"
+            file="src/lorisException_pi.cpp"/>
+      <FILE id="e8CptD" name="lorisException_pi.h" compile="0" resource="0"
+            file="src/lorisException_pi.h"/>
+      <FILE id="qvjIYP" name="LorisExceptions.cpp" compile="1" resource="0"
+            file="src/LorisExceptions.cpp"/>
+      <FILE id="YBjtyU" name="LorisExceptions.h" compile="0" resource="0"
+            file="src/LorisExceptions.h"/>
+      <FILE id="K0S1zl" name="lorisNonObj_pi.cpp" compile="1" resource="0"
+            file="src/lorisNonObj_pi.cpp"/>
+      <FILE id="FpnSom" name="lorisPartialList_pi.cpp" compile="1" resource="0"
+            file="src/lorisPartialList_pi.cpp"/>
+      <FILE id="xkQF8f" name="lorisUtilities_pi.cpp" compile="1" resource="0"
+            file="src/lorisUtilities_pi.cpp"/>
+      <FILE id="oDOeQR" name="Makefile.am" compile="0" resource="1" file="src/Makefile.am"/>
+      <FILE id="vYg0rO" name="Makefile.in" compile="0" resource="1" file="src/Makefile.in"/>
+      <FILE id="Sg4WgM" name="Marker.cpp" compile="1" resource="0" file="src/Marker.cpp"/>
+      <FILE id="T2dJbu" name="Marker.h" compile="0" resource="0" file="src/Marker.h"/>
+      <FILE id="nHREBn" name="Morpher.cpp" compile="1" resource="0" file="src/Morpher.cpp"/>
+      <FILE id="foDiDl" name="Morpher.h" compile="0" resource="0" file="src/Morpher.h"/>
+      <FILE id="N0SnXV" name="NoiseGenerator.cpp" compile="1" resource="0"
+            file="src/NoiseGenerator.cpp"/>
+      <FILE id="qVWgk0" name="NoiseGenerator.h" compile="0" resource="0"
+            file="src/NoiseGenerator.h"/>
+      <FILE id="ZsdNs2" name="Notifier.cpp" compile="1" resource="0" file="src/Notifier.cpp"/>
+      <FILE id="gV4iCi" name="Notifier.h" compile="0" resource="0" file="src/Notifier.h"/>
+      <FILE id="qJahu2" name="Oscillator.cpp" compile="1" resource="0" file="src/Oscillator.cpp"/>
+      <FILE id="s9FeaD" name="Oscillator.h" compile="0" resource="0" file="src/Oscillator.h"/>
+      <FILE id="hZrNu5" name="Partial.cpp" compile="1" resource="0" file="src/Partial.cpp"/>
+      <FILE id="tvWhiT" name="Partial.h" compile="0" resource="0" file="src/Partial.h"/>
+      <FILE id="O8zAMK" name="PartialBuilder.cpp" compile="1" resource="0"
+            file="src/PartialBuilder.cpp"/>
+      <FILE id="erOWVV" name="PartialBuilder.h" compile="0" resource="0"
+            file="src/PartialBuilder.h"/>
+      <FILE id="p1XAYN" name="PartialList.h" compile="0" resource="0" file="src/PartialList.h"/>
+      <FILE id="GjoVmx" name="PartialPtrs.h" compile="0" resource="0" file="src/PartialPtrs.h"/>
+      <FILE id="duyGuM" name="PartialUtils.cpp" compile="1" resource="0"
+            file="src/PartialUtils.cpp"/>
+      <FILE id="HnmJII" name="PartialUtils.h" compile="0" resource="0" file="src/PartialUtils.h"/>
+      <FILE id="c2b6Of" name="phasefix.cpp" compile="1" resource="0" file="src/phasefix.cpp"/>
+      <FILE id="pPvyga" name="phasefix.h" compile="0" resource="0" file="src/phasefix.h"/>
+      <FILE id="XRMAMS" name="README" compile="0" resource="1" file="src/README"/>
+      <FILE id="SzQAb0" name="ReassignedSpectrum.cpp" compile="1" resource="0"
+            file="src/ReassignedSpectrum.cpp"/>
+      <FILE id="jFYXWB" name="ReassignedSpectrum.h" compile="0" resource="0"
+            file="src/ReassignedSpectrum.h"/>
+      <FILE id="BXurJD" name="Resampler.cpp" compile="1" resource="0" file="src/Resampler.cpp"/>
+      <FILE id="M62w39" name="Resampler.h" compile="0" resource="0" file="src/Resampler.h"/>
+      <FILE id="HRvuPj" name="SdifFile.cpp" compile="1" resource="0" file="src/SdifFile.cpp"/>
+      <FILE id="Bw9O0S" name="SdifFile.h" compile="0" resource="0" file="src/SdifFile.h"/>
+      <FILE id="dHGYH5" name="Sieve.cpp" compile="1" resource="0" file="src/Sieve.cpp"/>
+      <FILE id="w2TVTm" name="Sieve.h" compile="0" resource="0" file="src/Sieve.h"/>
+      <FILE id="b8S1p9" name="SpcFile.cpp" compile="1" resource="0" file="src/SpcFile.cpp"/>
+      <FILE id="qkab2W" name="SpcFile.h" compile="0" resource="0" file="src/SpcFile.h"/>
+      <FILE id="ml3Wt8" name="SpectralPeaks.h" compile="0" resource="0" file="src/SpectralPeaks.h"/>
+      <FILE id="Ry8qGO" name="SpectralPeakSelector.cpp" compile="1" resource="0"
+            file="src/SpectralPeakSelector.cpp"/>
+      <FILE id="QDjmoy" name="SpectralPeakSelector.h" compile="0" resource="0"
+            file="src/SpectralPeakSelector.h"/>
+      <FILE id="QkCKoz" name="SpectralSurface.cpp" compile="1" resource="0"
+            file="src/SpectralSurface.cpp"/>
+      <FILE id="zI6ZPs" name="SpectralSurface.h" compile="0" resource="0"
+            file="src/SpectralSurface.h"/>
+      <FILE id="tsCwcl" name="Synthesizer.cpp" compile="1" resource="0" file="src/Synthesizer.cpp"/>
+      <FILE id="WI9jAk" name="Synthesizer.h" compile="0" resource="0" file="src/Synthesizer.h"/>
+    </GROUP>
+    <FILE id="WDkfUp" name="config.h.in" compile="0" resource="1" file="config.h.in"/>
+  </MAINGROUP>
+  <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1"/>
+  <EXPORTFORMATS>
+    <VS2017 targetFolder="Builds/VisualStudio2017">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug" targetName="loris_win_lib" defines="_HAS_AUTO_PTR_ETC=1&#10;NOMINMAX=1"/>
+        <CONFIGURATION isDebug="0" name="Release" targetName="loris_win_lib" defines="_HAS_AUTO_PTR_ETC=1&#10;NOMINMAX=1"/>
+      </CONFIGURATIONS>
+    </VS2017>
+  </EXPORTFORMATS>
+  <MODULES/>
+</JUCERPROJECT>

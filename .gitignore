@@ -5,3 +5,4 @@ loris_library/JuceLibraryCode
 loris_test/JuceLibraryCode
 loris_test/Builds
 loris_library_macOS.zip
+loris_win_lib/loris_win_lib/Builds/

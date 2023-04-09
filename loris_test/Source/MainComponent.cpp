@@ -44,6 +44,15 @@ MainComponent::MainComponent():
 #else
     currentDir = currentDir.getChildFile("loris_library/Builds/MacOSX/build/Release");
 #endif
+#elif JUCE_WINDOWS
+
+	currentDir = currentDir.getParentDirectory();
+
+#if JUCE_DEBUG
+	currentDir = currentDir.getChildFile("loris_library/Builds/VisualStudio2017/x64/Debug/Dynamic Library");
+#else
+	currentDir = currentDir.getChildFile("loris_library/Builds/VisualStudio2017/x64/Release/Dynamic Library");
+#endif
 #endif
     
     lorisManager = new LorisManager(currentDir, [&](String error_)
@@ -69,7 +78,7 @@ MainComponent::MainComponent():
     
     timeDomain.onChange = [&]()
     {
-        lorisManager->set("time_domain_type", timeDomain.getText());
+        lorisManager->set("timedomain", timeDomain.getText());
     };
     
     addAndMakeVisible(timeDomain);
