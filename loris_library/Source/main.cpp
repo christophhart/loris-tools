@@ -180,13 +180,13 @@ struct LorisState
                                double time_,
                                double rootFrequency_):
               channelIndex(channelIndex_),
-              obj(obj_),
               partialIndex(partialIndex_),
               sampleRate(sampleRate_),
-              time(time_),
-              rootFrequency(rootFrequency_)
+              rootFrequency(rootFrequency_),
+              obj(obj_),
+              time(time_)
             {
-                static_assert(sizeof(CustomFunctionArgs) == sizeof(FunctionPOD));
+                static_assert(sizeof(CustomFunctionArgs) == sizeof(FunctionPOD), "not the same size");
                 
                 frequency = b.frequency();
                 phase = b.phase();
@@ -316,7 +316,7 @@ struct LorisState
         
         void setMetadata(juce::AudioFormatReader* r, double root)
         {
-            numSamples = r->lengthInSamples;
+            numSamples = (int)r->lengthInSamples;
             sampleRate = r->sampleRate;
             rootFrequency = root;
         }
@@ -641,9 +641,9 @@ struct LorisState
             newEntry->setMetadata(r, rootFrequency);
             newEntry->setOptions(currentOption);
             
-            juce::AudioSampleBuffer bf(r->numChannels, r->lengthInSamples);
+            juce::AudioSampleBuffer bf(r->numChannels, (int)r->lengthInSamples);
             
-            r->read(&bf, 0, r->lengthInSamples, 0, true, true);
+            r->read(&bf, 0, (int)r->lengthInSamples, 0, true, true);
             
             juce::HeapBlock<double> buffer;
             
@@ -742,13 +742,14 @@ DLL_EXPORT void destroyLorisState(void* stateToDestroy)
     delete (LorisState*)stateToDestroy;
 }
 
-DLL_EXPORT char* getLibraryVersion()
+DLL_EXPORT const char* getLibraryVersion()
 {
-    return "0.1.0";
+    return ProjectInfo::versionString;
 }
 
-DLL_EXPORT char* getLorisVersion()
+DLL_EXPORT const char* getLorisVersion()
 {
+    
     return LORIS_VERSION_STR;
 }
 
@@ -769,8 +770,6 @@ DLL_EXPORT bool loris_analyze(void* state, char* file, double rootFrequency)
     auto typed = (LorisState*)state;
     
     juce::File f(file);
-    
-    auto func = std::bind(&LorisState::reportError, typed, std::placeholders::_1, std::placeholders::_2);
     
     return typed->analyse(f, rootFrequency);
 }

@@ -10,12 +10,14 @@
   <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1"/>
   <EXPORTFORMATS>
     <XCODE_MAC targetFolder="Builds/MacOSX" iosDevelopmentTeamID="PF9H8PK77F"
-               externalLibraries="loris" extraCompilerFlags="-fdeclspec" xcodeValidArchs="x86_64">
+               externalLibraries="loris" extraCompilerFlags="-Wno-comment -Wno-deprecated"
+               xcodeValidArchs="x86_64">
       <CONFIGURATIONS>
         <CONFIGURATION isDebug="1" name="Debug" targetName="loris_library_debug" headerPath="/usr/local/include/"
-                       libraryPath="/usr/local/lib"/>
+                       libraryPath="/usr/local/lib" macOSDeploymentTarget="13.0" osxCompatibility="13.0 SDK"/>
         <CONFIGURATION isDebug="0" name="Release" targetName="loris_library_release"
-                       headerPath="/usr/local/include/" libraryPath="/usr/local/lib"/>
+                       headerPath="/usr/local/include/" libraryPath="/usr/local/lib"
+                       macOSDeploymentTarget="13.0" osxCompatibility="13.0 SDK"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
         <MODULEPATH id="juce_core" path="../../../JUCE/modules"/>
