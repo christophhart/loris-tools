@@ -15,7 +15,7 @@ jobs:
       - name: Checkout loris repository
         uses: actions/checkout@v1
         with:
-          ref: 'master'
+          ref: 'main'
       - name: Build Library
         working-directory: ${{ github.workspace }}
         run: sh build_library.sh
