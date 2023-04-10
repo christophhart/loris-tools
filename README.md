@@ -10,6 +10,12 @@ A collection of sample analysis tools for HISE based on the Loris library. The [
 
 The repository contains three projects:
 
+## Loris Toolbox
+
+![](toolbox.png)
+
+A HISE Project that demonstrates how to use the Loris library with the scripting layer. It can be compiled to a standalone app, making it a GUI interface for the most important functions of Loris!
+
 ## loris_library
 
 A dynamic library wrapper that encapsulated the calls into Loris through a C-only API interface. If you want to use Loris in HISE, just grab the latest build and put it in the HISE app data directory. 
@@ -18,7 +24,5 @@ A dynamic library wrapper that encapsulated the calls into Loris through a C-onl
 
 A simple JUCE C++ app that's only reason of existence is prototyping the API without recompiling the big ol' HISE everytime. You probably will never need to use this.
 
-## Loris Toolbox
 
-A HISE Project that demonstrates how to use the Loris library with the scripting layer. It can be compiled to a standalone app, making it a GUI interface for the most important functions of Loris!
 
