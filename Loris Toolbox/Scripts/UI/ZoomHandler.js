@@ -4,7 +4,7 @@ namespace ZoomHandler
 	const var MAX_ZOOM = 2.0;
 	const var ZOOM_STEP = 0.1;
 	const var INTERFACE_WIDTH = 900;
-	const var INTERFACE_HEIGHT = 500;
+	const var INTERFACE_HEIGHT = 600;
 
 	const var ZoomPanel = Content.getComponent("ZoomPanel");
 	
@@ -82,9 +82,6 @@ namespace ZoomHandler
 	
 			if(currentZoom != zoomToUse)
 			{
-				Console.print(zoomToUse);
-				
-
 				Settings.setZoomLevel(zoomToUse);
 			}
 		}

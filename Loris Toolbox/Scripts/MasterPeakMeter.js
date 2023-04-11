@@ -2,7 +2,7 @@ const var MasterPeak = Content.addFloatingTile("MasterPeak", 870, 30);
 
 MasterPeak.setContentData({
   "Type": "MatrixPeakMeter",
-  "ProcessorId": "toolbox_project",
+  "ProcessorId": "Loris Toolbox",
   "SegmentLedSize": 2.0,
   "UpDecayTime": 0.0,
   "DownDecayTime": 1100.0,
@@ -17,10 +17,10 @@ MasterPeak.setContentData({
 });
 
 Content.setPropertiesFromJSON("MasterPeak", {
-    "x": 870.0,
-    "y": 30.0,
+    "x": 879.0,
+    "y": 41.0,
     "width": 20.0,
-    "height": 412.0,
+    "height": 530.0,
     "bgColour": 0xFF333333,
     "itemColour": 0xFF888888,
     "itemColour2": 0xFF404040,

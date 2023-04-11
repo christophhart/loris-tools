@@ -50,7 +50,7 @@ inline function make(panelName)
 {
 	local p = Content.getComponent(panelName);
 	p.set("allowCallbacks", "All Callbacks");
-	p.set("height", 200);
+	p.set("height", 170);
 	
 	p.data.path = Content.createPath();
 	
@@ -104,7 +104,7 @@ inline function make(panelName)
 			
 			if(thisxpos != 0.0)
 			{
-				g.setColour(Colours.withMultipliedBrightness(0xFF521433, isDragger ? 1.8 : 1.5));
+				g.setColour(Colours.withMultipliedBrightness(Manifest.PAGE_COLOURS[3], isDragger ? 1.8 : 1.5));
 				g.fillRoundedRectangle([thisxpos-2, 13, 4, h-13], 2.0);
 				
 				if(isDragger)
@@ -123,7 +123,7 @@ inline function make(panelName)
 			pa[1] += 40;
 			pa[3] -= 40;
 			
-			g.setColour(Colours.withMultipliedBrightness(0xFF521433, isDragger ? 1.8 : 1.5));
+			g.setColour(Colours.withMultipliedBrightness(Manifest.PAGE_COLOURS[3], isDragger ? 1.8 : 1.5));
 			g.drawPath(this.data.path, pa, 2.0);
 		}
 	});
@@ -210,4 +210,11 @@ inline function make(panelName)
 	return p;
 }
 
+
+
+
 }
+
+const var DilateScaleSlider = Content.getComponent("DilateScaleSlider");
+
+DilateScaleSlider.setLocalLookAndFeel(Manifest.defaultLaf);

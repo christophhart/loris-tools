@@ -2,6 +2,8 @@ namespace BufferPreview
 {
 inline function setBuffer(unused, unused, file)
 {
+	/*
+
 	local sf = FileSystem.fromReferenceString(file, FileSystem.AudioFiles);
 				
 	local newData = [];
@@ -23,9 +25,27 @@ inline function setBuffer(unused, unused, file)
 	}
 	
 	rebuild(this);
+	*/
 }
 
 
+inline function setResynthesisedBuffer(panel, bufferData, samplerate)
+{
+	local isMultiChannel = isDefined(bufferData[0].length);
+		
+	if(!isMultiChannel)
+	{
+		panel.data.channels = [bufferData];
+	}
+	else
+	{
+		panel.data.channels = bufferData;
+	}
+	
+	panel.data.samplerate = samplerate;
+	
+	rebuild(panel);
+}
 
 inline function rebuild(panel)
 {
@@ -49,7 +69,7 @@ inline function rebuild(panel)
 		
 		local useHighRes = samplesPerPixel < 5;
 		
-		Console.print(samplesPerPixel);
+		
 		
 		for(i = 0.0; i < c.length; i += samplesPerPixel)
 		{
@@ -95,13 +115,9 @@ inline function make(name)
 		
 	p.data.paths = [];
 	p.data.channels = [];
-	p.data.sampleRate = 44100.0;
+	p.data.samplerate = 44100.0;
 		
 	p.set("allowCallbacks", "Clicks & Hover");
-		
-	
-		
-	
 		
 	p.setMouseCallback(function(event)
 	{
@@ -109,16 +125,13 @@ inline function make(name)
 
 		if(event.clicked)
 		{
-			Console.print("PREVIEW");
-			
-
 			Engine.playBuffer(this.data.channels, function[this](isPlaying, pos)
 			{
 				this.data.previewPos = pos;
 				this.data.isPlaying = isPlaying;
 				
 				this.repaint();
-			}, this.data.sampleRate);
+			}, this.data.samplerate);
 		}
 		if(event.mouseUp)
 		{
@@ -143,9 +156,10 @@ inline function make(name)
 		{
 			var pb = Rect.removeFromTop(b, this.get("height") / this.data.paths.length);
 			
-			g.setColour(0x11FFFFFF);
+			g.setColour(Colours.withAlpha(this.get("itemColour"), 0.1));
+			
 			g.fillPath(p, pb);
-			g.setColour(0xEEFFFFFF);
+			g.setColour(0x5aFFFFFF);
 			g.drawPath(p, pb, 1.0);
 		}
 		
@@ -168,6 +182,13 @@ inline function make(name)
 	});
 	
 	OriginalWatcher.registerAtBroadcaster(p, "update preview", setBuffer);
+	
+	Manifest.pageBroadcaster.addComponentPropertyListener(p, "itemColour", "setItemColour", function(index, value)
+	{
+		return Manifest.PAGE_COLOURS[value];
+	});
+	
+	Manifest.pageBroadcaster.addComponentRefreshListener(p, "repaint", "repaint");
 	
 	return p;
 }
