@@ -135,7 +135,17 @@
         <FILE id="Oqkyae" name="Synthesizer.cpp" compile="1" resource="0" file="Source/src/Synthesizer.cpp"/>
         <FILE id="NqMPnJ" name="Synthesizer.h" compile="0" resource="0" file="Source/src/Synthesizer.h"/>
       </GROUP>
-      <FILE id="JPTs9s" name="main.cpp" compile="1" resource="0" file="Source/main.cpp"/>
+      <FILE id="tYvOEd" name="Helpers.cpp" compile="1" resource="0" file="Source/Helpers.cpp"/>
+      <FILE id="S2iuDt" name="Helpers.h" compile="0" resource="0" file="Source/Helpers.h"/>
+      <FILE id="XZV0sX" name="LorisState.cpp" compile="1" resource="0" file="Source/LorisState.cpp"/>
+      <FILE id="QgbcZD" name="LorisState.h" compile="0" resource="0" file="Source/LorisState.h"/>
+      <FILE id="tN9MP4" name="MultichannelPartialList.cpp" compile="1" resource="0"
+            file="Source/MultichannelPartialList.cpp"/>
+      <FILE id="jnlDwr" name="MultichannelPartialList.h" compile="0" resource="0"
+            file="Source/MultichannelPartialList.h"/>
+      <FILE id="L1Bobq" name="Properties.h" compile="0" resource="0" file="Source/Properties.h"/>
+      <FILE id="lT1E1g" name="public.cpp" compile="1" resource="0" file="Source/public.cpp"/>
+      <FILE id="aqCvem" name="public.h" compile="0" resource="0" file="Source/public.h"/>
     </GROUP>
   </MAINGROUP>
   <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1"/>
