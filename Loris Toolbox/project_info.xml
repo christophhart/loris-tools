@@ -12,10 +12,10 @@
   <AdditionalDspLibraries value=""/>
   <OSXStaticLibs value=""/>
   <WindowsStaticLibFolder value=""/>
-  <ExtraDefinitionsWindows value=""/>
-  <ExtraDefinitionsOSX value=""/>
+  <ExtraDefinitionsWindows value="HISE_ENABLE_LORIS_ON_FRONTEND=1"/>
+  <ExtraDefinitionsOSX value="HISE_ENABLE_LORIS_ON_FRONTEND=1"/>
   <ExtraDefinitionsIOS value=""/>
-  <ExtraDefinitionsLinux value=""/>
+  <ExtraDefinitionsLinux value="HISE_ENABLE_LORIS_ON_FRONTEND=1"/>
   <AppGroupID value=""/>
   <RedirectSampleFolder value=""/>
   <AAXCategoryFX value="AAX_ePlugInCategory_Modulation"/>

@@ -5,19 +5,147 @@
               companyName="HISE" companyWebsite="https://hise.dev/">
   <MAINGROUP id="UOFjeC" name="loris_library">
     <GROUP id="{64C9039F-91E3-D640-65BD-62DB920A6560}" name="Source">
+      <GROUP id="{B4486FB9-181A-E177-BBB3-D2C4CEAFCD9E}" name="src">
+        <FILE id="NDajBP" name="AiffData.cpp" compile="1" resource="0" file="Source/src/AiffData.cpp"/>
+        <FILE id="YKw74G" name="AiffData.h" compile="0" resource="0" file="Source/src/AiffData.h"/>
+        <FILE id="gtNG1f" name="AiffFile.cpp" compile="1" resource="0" file="Source/src/AiffFile.cpp"/>
+        <FILE id="VaiErA" name="AiffFile.h" compile="0" resource="0" file="Source/src/AiffFile.h"/>
+        <FILE id="QB4Uux" name="Analyzer.cpp" compile="1" resource="0" file="Source/src/Analyzer.cpp"/>
+        <FILE id="CkZAt8" name="Analyzer.h" compile="0" resource="0" file="Source/src/Analyzer.h"/>
+        <FILE id="ansOIG" name="AssociateBandwidth.cpp" compile="1" resource="0"
+              file="Source/src/AssociateBandwidth.cpp"/>
+        <FILE id="mDepM0" name="AssociateBandwidth.h" compile="0" resource="0"
+              file="Source/src/AssociateBandwidth.h"/>
+        <FILE id="EfCqpu" name="BigEndian.cpp" compile="1" resource="0" file="Source/src/BigEndian.cpp"/>
+        <FILE id="PUUslB" name="BigEndian.h" compile="0" resource="0" file="Source/src/BigEndian.h"/>
+        <FILE id="yWJcOB" name="Breakpoint.cpp" compile="1" resource="0" file="Source/src/Breakpoint.cpp"/>
+        <FILE id="O2AVtm" name="Breakpoint.h" compile="0" resource="0" file="Source/src/Breakpoint.h"/>
+        <FILE id="icvpNb" name="BreakpointEnvelope.h" compile="0" resource="0"
+              file="Source/src/BreakpointEnvelope.h"/>
+        <FILE id="v2wAyS" name="BreakpointUtils.cpp" compile="1" resource="0"
+              file="Source/src/BreakpointUtils.cpp"/>
+        <FILE id="REj6LF" name="BreakpointUtils.h" compile="0" resource="0"
+              file="Source/src/BreakpointUtils.h"/>
+        <FILE id="qZXb5h" name="Channelizer.cpp" compile="1" resource="0" file="Source/src/Channelizer.cpp"/>
+        <FILE id="kSlW5b" name="Channelizer.h" compile="0" resource="0" file="Source/src/Channelizer.h"/>
+        <FILE id="t8CcmS" name="Collator.cpp" compile="1" resource="0" file="Source/src/Collator.cpp"/>
+        <FILE id="NHN6Q2" name="Collator.h" compile="0" resource="0" file="Source/src/Collator.h"/>
+        <FILE id="h211gW" name="Dilator.cpp" compile="1" resource="0" file="Source/src/Dilator.cpp"/>
+        <FILE id="MRD1Bj" name="Dilator.h" compile="0" resource="0" file="Source/src/Dilator.h"/>
+        <FILE id="tZI6pW" name="Distiller.cpp" compile="1" resource="0" file="Source/src/Distiller.cpp"/>
+        <FILE id="BNLz25" name="Distiller.h" compile="0" resource="0" file="Source/src/Distiller.h"/>
+        <FILE id="buAUac" name="Envelope.cpp" compile="1" resource="0" file="Source/src/Envelope.cpp"/>
+        <FILE id="ZwrfPS" name="Envelope.h" compile="0" resource="0" file="Source/src/Envelope.h"/>
+        <FILE id="EVKIgb" name="Exception.h" compile="0" resource="0" file="Source/src/Exception.h"/>
+        <FILE id="DpamWj" name="F0Estimate.cpp" compile="1" resource="0" file="Source/src/F0Estimate.cpp"/>
+        <FILE id="BXjKLM" name="F0Estimate.h" compile="0" resource="0" file="Source/src/F0Estimate.h"/>
+        <FILE id="uBjmer" name="fftsg.cpp" compile="1" resource="0" file="Source/src/fftsg.cpp"/>
+        <FILE id="LeDhQC" name="Filter.cpp" compile="1" resource="0" file="Source/src/Filter.cpp"/>
+        <FILE id="n2fg7h" name="Filter.h" compile="0" resource="0" file="Source/src/Filter.h"/>
+        <FILE id="KElCd6" name="FourierTransform.cpp" compile="1" resource="0"
+              file="Source/src/FourierTransform.cpp"/>
+        <FILE id="fQZIs2" name="FourierTransform.h" compile="0" resource="0"
+              file="Source/src/FourierTransform.h"/>
+        <FILE id="YITvd8" name="FrequencyReference.cpp" compile="1" resource="0"
+              file="Source/src/FrequencyReference.cpp"/>
+        <FILE id="ZSz0CB" name="FrequencyReference.h" compile="0" resource="0"
+              file="Source/src/FrequencyReference.h"/>
+        <FILE id="oitcdL" name="Fundamental.cpp" compile="1" resource="0" file="Source/src/Fundamental.cpp"/>
+        <FILE id="H4EZzp" name="Fundamental.h" compile="0" resource="0" file="Source/src/Fundamental.h"/>
+        <FILE id="Ze9iZU" name="Harmonifier.cpp" compile="1" resource="0" file="Source/src/Harmonifier.cpp"/>
+        <FILE id="bPFx26" name="Harmonifier.h" compile="0" resource="0" file="Source/src/Harmonifier.h"/>
+        <FILE id="Vx4vMk" name="ImportLemur.cpp" compile="1" resource="0" file="Source/src/ImportLemur.cpp"/>
+        <FILE id="ihRGuc" name="ImportLemur.h" compile="0" resource="0" file="Source/src/ImportLemur.h"/>
+        <FILE id="RJ3I1P" name="KaiserWindow.cpp" compile="1" resource="0"
+              file="Source/src/KaiserWindow.cpp"/>
+        <FILE id="o20HJ2" name="KaiserWindow.h" compile="0" resource="0" file="Source/src/KaiserWindow.h"/>
+        <FILE id="FNgysB" name="LinearEnvelope.cpp" compile="1" resource="0"
+              file="Source/src/LinearEnvelope.cpp"/>
+        <FILE id="bF2TJo" name="LinearEnvelope.h" compile="0" resource="0"
+              file="Source/src/LinearEnvelope.h"/>
+        <FILE id="sEYDB0" name="loris.h" compile="0" resource="0" file="Source/src/loris.h"/>
+        <FILE id="ogUlIh" name="loris.h.in" compile="0" resource="1" file="Source/src/loris.h.in"/>
+        <FILE id="U0Uir4" name="lorisAnalyzer_pi.cpp" compile="1" resource="0"
+              file="Source/src/lorisAnalyzer_pi.cpp"/>
+        <FILE id="RLfWsr" name="lorisBpEnvelope_pi.cpp" compile="1" resource="0"
+              file="Source/src/lorisBpEnvelope_pi.cpp"/>
+        <FILE id="pSg3yM" name="lorisException_pi.cpp" compile="1" resource="0"
+              file="Source/src/lorisException_pi.cpp"/>
+        <FILE id="FyvI0J" name="lorisException_pi.h" compile="0" resource="0"
+              file="Source/src/lorisException_pi.h"/>
+        <FILE id="fccq4D" name="LorisExceptions.cpp" compile="1" resource="0"
+              file="Source/src/LorisExceptions.cpp"/>
+        <FILE id="S7znm9" name="LorisExceptions.h" compile="0" resource="0"
+              file="Source/src/LorisExceptions.h"/>
+        <FILE id="u7BXbm" name="lorisNonObj_pi.cpp" compile="1" resource="0"
+              file="Source/src/lorisNonObj_pi.cpp"/>
+        <FILE id="UwxF7E" name="lorisPartialList_pi.cpp" compile="1" resource="0"
+              file="Source/src/lorisPartialList_pi.cpp"/>
+        <FILE id="i2kzRG" name="lorisUtilities_pi.cpp" compile="1" resource="0"
+              file="Source/src/lorisUtilities_pi.cpp"/>
+        <FILE id="n7ORsj" name="Makefile.am" compile="0" resource="1" file="Source/src/Makefile.am"/>
+        <FILE id="WeTdle" name="Makefile.in" compile="0" resource="1" file="Source/src/Makefile.in"/>
+        <FILE id="LXuMny" name="Marker.cpp" compile="1" resource="0" file="Source/src/Marker.cpp"/>
+        <FILE id="A0Ycad" name="Marker.h" compile="0" resource="0" file="Source/src/Marker.h"/>
+        <FILE id="IEBjd5" name="Morpher.cpp" compile="1" resource="0" file="Source/src/Morpher.cpp"/>
+        <FILE id="PmX5Ha" name="Morpher.h" compile="0" resource="0" file="Source/src/Morpher.h"/>
+        <FILE id="x4tSNO" name="NoiseGenerator.cpp" compile="1" resource="0"
+              file="Source/src/NoiseGenerator.cpp"/>
+        <FILE id="Fx4PIs" name="NoiseGenerator.h" compile="0" resource="0"
+              file="Source/src/NoiseGenerator.h"/>
+        <FILE id="Prr2Ao" name="Notifier.cpp" compile="1" resource="0" file="Source/src/Notifier.cpp"/>
+        <FILE id="r7Ttlc" name="Notifier.h" compile="0" resource="0" file="Source/src/Notifier.h"/>
+        <FILE id="qJtUP4" name="Oscillator.cpp" compile="1" resource="0" file="Source/src/Oscillator.cpp"/>
+        <FILE id="V2bIY1" name="Oscillator.h" compile="0" resource="0" file="Source/src/Oscillator.h"/>
+        <FILE id="HOmOU1" name="Partial.cpp" compile="1" resource="0" file="Source/src/Partial.cpp"/>
+        <FILE id="GLT6Wu" name="Partial.h" compile="0" resource="0" file="Source/src/Partial.h"/>
+        <FILE id="Dgriyg" name="PartialBuilder.cpp" compile="1" resource="0"
+              file="Source/src/PartialBuilder.cpp"/>
+        <FILE id="tyfzdV" name="PartialBuilder.h" compile="0" resource="0"
+              file="Source/src/PartialBuilder.h"/>
+        <FILE id="M4LUxf" name="PartialList.h" compile="0" resource="0" file="Source/src/PartialList.h"/>
+        <FILE id="uFLSrE" name="PartialPtrs.h" compile="0" resource="0" file="Source/src/PartialPtrs.h"/>
+        <FILE id="biYmli" name="PartialUtils.cpp" compile="1" resource="0"
+              file="Source/src/PartialUtils.cpp"/>
+        <FILE id="thOB8g" name="PartialUtils.h" compile="0" resource="0" file="Source/src/PartialUtils.h"/>
+        <FILE id="b1Y3Nx" name="phasefix.cpp" compile="1" resource="0" file="Source/src/phasefix.cpp"/>
+        <FILE id="k4cqXB" name="phasefix.h" compile="0" resource="0" file="Source/src/phasefix.h"/>
+        <FILE id="aqlGTG" name="README" compile="0" resource="1" file="Source/src/README"/>
+        <FILE id="rC0W68" name="ReassignedSpectrum.cpp" compile="1" resource="0"
+              file="Source/src/ReassignedSpectrum.cpp"/>
+        <FILE id="C52Lpo" name="ReassignedSpectrum.h" compile="0" resource="0"
+              file="Source/src/ReassignedSpectrum.h"/>
+        <FILE id="QrJXZ6" name="Resampler.cpp" compile="1" resource="0" file="Source/src/Resampler.cpp"/>
+        <FILE id="HYo89G" name="Resampler.h" compile="0" resource="0" file="Source/src/Resampler.h"/>
+        <FILE id="UJDNf2" name="SdifFile.cpp" compile="1" resource="0" file="Source/src/SdifFile.cpp"/>
+        <FILE id="KGRfYD" name="SdifFile.h" compile="0" resource="0" file="Source/src/SdifFile.h"/>
+        <FILE id="RlGokG" name="Sieve.cpp" compile="1" resource="0" file="Source/src/Sieve.cpp"/>
+        <FILE id="fHCb1w" name="Sieve.h" compile="0" resource="0" file="Source/src/Sieve.h"/>
+        <FILE id="N5vAWy" name="SpcFile.cpp" compile="1" resource="0" file="Source/src/SpcFile.cpp"/>
+        <FILE id="kpih9U" name="SpcFile.h" compile="0" resource="0" file="Source/src/SpcFile.h"/>
+        <FILE id="pGKaqj" name="SpectralPeaks.h" compile="0" resource="0" file="Source/src/SpectralPeaks.h"/>
+        <FILE id="phKlZS" name="SpectralPeakSelector.cpp" compile="1" resource="0"
+              file="Source/src/SpectralPeakSelector.cpp"/>
+        <FILE id="mc4jzb" name="SpectralPeakSelector.h" compile="0" resource="0"
+              file="Source/src/SpectralPeakSelector.h"/>
+        <FILE id="VxE2bD" name="SpectralSurface.cpp" compile="1" resource="0"
+              file="Source/src/SpectralSurface.cpp"/>
+        <FILE id="Y2SPqI" name="SpectralSurface.h" compile="0" resource="0"
+              file="Source/src/SpectralSurface.h"/>
+        <FILE id="Oqkyae" name="Synthesizer.cpp" compile="1" resource="0" file="Source/src/Synthesizer.cpp"/>
+        <FILE id="NqMPnJ" name="Synthesizer.h" compile="0" resource="0" file="Source/src/Synthesizer.h"/>
+      </GROUP>
       <FILE id="JPTs9s" name="main.cpp" compile="1" resource="0" file="Source/main.cpp"/>
     </GROUP>
   </MAINGROUP>
   <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1"/>
   <EXPORTFORMATS>
     <XCODE_MAC targetFolder="Builds/MacOSX" iosDevelopmentTeamID="PF9H8PK77F"
-               externalLibraries="loris" extraCompilerFlags="-Wno-comment -Wno-deprecated"
-               xcodeValidArchs="x86_64">
+               extraCompilerFlags="-Wno-comment -Wno-deprecated" xcodeValidArchs="arm64,x86_64">
       <CONFIGURATIONS>
-        <CONFIGURATION isDebug="1" name="Debug" targetName="loris_library_debug" headerPath="/usr/local/include/"
-                       libraryPath="/usr/local/lib" macOSDeploymentTarget="13.0" osxCompatibility="13.0 SDK"/>
+        <CONFIGURATION isDebug="1" name="Debug" targetName="loris_library_debug" macOSDeploymentTarget="13.0"
+                       osxCompatibility="13.0 SDK"/>
         <CONFIGURATION isDebug="0" name="Release" targetName="loris_library_release"
-                       headerPath="/usr/local/include/" libraryPath="/usr/local/lib"
                        macOSDeploymentTarget="13.0" osxCompatibility="13.0 SDK"/>
       </CONFIGURATIONS>
       <MODULEPATHS>

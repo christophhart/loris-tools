@@ -1,8 +1,9 @@
-#include <loris.h>
-#include <loris/Partial.h>
-#include <loris/Breakpoint.h>
-#include <loris/SdifFile.h>
-#include <loris/PartialUtils.h>
+#include "src/loris.h"
+#include "src/Partial.h"
+#include "src/Breakpoint.h"
+#include "src/SdifFile.h"
+#include "src/PartialUtils.h"
+
 #include <JuceHeader.h>
 
 #if JUCE_WINDOWS
@@ -16,6 +17,8 @@
 namespace OptionIds
 {
 DECLARE_ID(timedomain);
+DECLARE_ID(enablecache);
+DECLARE_ID(windowwidth);
 DECLARE_ID(freqfloor);
 DECLARE_ID(ampfloor);
 DECLARE_ID(sidelobes);
@@ -26,7 +29,7 @@ DECLARE_ID(bwregionwidth);
 
 static juce::Array<juce::Identifier> getAllIds()
 {
-    return {timedomain, freqfloor, ampfloor, sidelobes, freqdrift, hoptime, croptime, bwregionwidth};
+    return {timedomain, enablecache, windowwidth, freqfloor, ampfloor, sidelobes, freqdrift, hoptime, croptime, bwregionwidth};
 }
 }
 
@@ -87,6 +90,8 @@ struct LorisState
             obj->setProperty(OptionIds::hoptime, hoptime);
             obj->setProperty(OptionIds::croptime, croptime);
             obj->setProperty(OptionIds::bwregionwidth, bwregionwidth);
+            obj->setProperty(OptionIds::windowwidth, windowwidth);
+            obj->setProperty(OptionIds::enablecache, enablecache);
             
             return juce::var(obj.get());
         }
@@ -112,6 +117,8 @@ struct LorisState
             ampfloor = analyzer_getAmpFloor();
             sidelobes = analyzer_getSidelobeLevel();
             bwregionwidth = analyzer_getBwRegionWidth();
+            windowwidth = analyzer_getWindowWidth();
+            enablecache = false;
         }
         
         bool update(const juce::Identifier& id, const juce::var& value)
@@ -129,6 +136,9 @@ struct LorisState
                 
                 return true;
             }
+            
+            return true;
+            
             if(id == OptionIds::freqfloor) { freqfloor = (double)value; analyzer_setFreqFloor(freqfloor); return true; }
             if(id == OptionIds::ampfloor) { ampfloor = (double)value; analyzer_setAmpFloor(ampfloor); return true; }
             if(id == OptionIds::sidelobes) { sidelobes = (double)value; analyzer_setSidelobeLevel(sidelobes); return true; }
@@ -136,20 +146,23 @@ struct LorisState
             if(id == OptionIds::hoptime) { hoptime = (double)value; analyzer_setHopTime(hoptime); return true; }
             if(id == OptionIds::croptime) { croptime = (double)value; analyzer_setCropTime(croptime); return true; }
             if(id == OptionIds::bwregionwidth) { bwregionwidth = (double)value; analyzer_setBwRegionWidth(bwregionwidth); return true; }
-            
+            if(id == OptionIds::enablecache) { enablecache = (bool)value; return true; }
+            if(id == OptionIds::windowwidth) { windowwidth = (double)value; }
+            if(id == OptionIds::windowwidth) { windowwidth = (double)value; }
             
             throw juce::Result::fail("Invalid option: " + id.toString());
-            
         }
         
         TimeDomainType currentDomainType = TimeDomainType::Seconds;
         double freqfloor;
-        double ampfloor;
-        double sidelobes;
+        double ampfloor = 90.0;
+        double sidelobes = 90.0;
         double freqdrift;
-        double hoptime;
-        double croptime;
-        double bwregionwidth;
+        double hoptime = 0.0129;
+        double croptime = 0.0129;
+        double bwregionwidth = 1.0;
+        bool enablecache = true;
+        double windowwidth = 1.0;
     };
     
     struct Helpers
@@ -560,6 +573,7 @@ struct LorisState
             
             for(int i = 0; i < list.size(); i++)
             {
+                juce::FloatVectorOperations::clear(buffer, numSamples);
                 ::synthesize(list[i], buffer, numSamples, sampleRate);
                 
                 for(int s = 0; s < numSamples; s++)
@@ -620,14 +634,23 @@ struct LorisState
         {
             if(af->matches(audioFile))
             {
-                messages.add("Skip " + audioFile.getFileName());
-                return true;
+                if(currentOption.enablecache)
+                {
+                    messages.add("Skip " + audioFile.getFileName());
+                    return true;
+                }
+                else
+                {
+                    analysedFiles.removeObject(af);
+                    break;
+                }
             }
         }
         juce::AudioFormatManager m;
         m.registerBasicFormats();
         
         analyzer_configure(rootFrequency * 0.8, rootFrequency);
+        //analyzer_setWindowWidth(rootFrequency * currentOption.windowwidth);
         analyzer_setFreqDrift(0.2 * rootFrequency);
         
         currentOption.initLorisParameters();
