@@ -234,31 +234,34 @@ namespace LorisProcessor
 	
 	function detectPitch()
 	{
-		var data = CURRENT_FILE.loadAsAudioFile();
-					
-		var isMultiChannel = isDefined(data[0].length);
-		
-		if(isMultiChannel)
-			data = data[0];
-			
-		var pitch = data.detectPitch(CURRENT_FILE.loadAudioMetadata().SampleRate, data.length * 0.2, data.length * 0.6);
-		
-		if(pitch != 0.0)
+		if(isDefined(CURRENT_FILE) && CURRENT_FILE.isFile())
 		{
-			for(i = 0; i < 127; i++)
+			var data = CURRENT_FILE.loadAsAudioFile();
+								
+			var isMultiChannel = isDefined(data[0].length);
+			
+			if(isMultiChannel)
+				data = data[0];
+				
+			var pitch = data.detectPitch(CURRENT_FILE.loadAudioMetadata().SampleRate, data.length * 0.2, data.length * 0.6);
+			
+			if(pitch != 0.0)
 			{
-				var thisPitch = Engine.getFrequencyForMidiNoteNumber(i);
-				
-				var ratio = Math.abs(1.0 - thisPitch / pitch);
-				
-				if(ratio < 0.05)
+				for(i = 0; i < 127; i++)
 				{
-					Console.print("FOUND");
+					var thisPitch = Engine.getFrequencyForMidiNoteNumber(i);
 					
-
-					rootNote.setValue(i+1);
-					rootNote.sendRepaintMessage();
-					return;
+					var ratio = Math.abs(1.0 - thisPitch / pitch);
+					
+					if(ratio < 0.05)
+					{
+						Console.print("FOUND");
+						
+	
+						rootNote.setValue(i+1);
+						rootNote.sendRepaintMessage();
+						return;
+					}
 				}
 			}
 		}
@@ -268,10 +271,10 @@ namespace LorisProcessor
 	{
 		CURRENT_FILE = FileSystem.fromReferenceString(file, FileSystem.AudioFiles);
 		
-		detectPitch();
-		
 		if(isDefined(CURRENT_FILE))
 		{
+			detectPitch();
+
 			this.callOnBackgroundThread(rebuild);
 		}
 	});
