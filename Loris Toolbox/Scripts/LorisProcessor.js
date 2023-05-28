@@ -74,6 +74,7 @@ namespace LorisProcessor
 	reg CURRENT_FILE;
 	reg CURRENT_FUNCTION;
 	reg CURRENT_SETUP;
+	reg CURRENT_POST;
 	reg PENDING = false;
 	
 	const var RetainNoiseButton = Content.getComponent("RetainNoiseButton");
@@ -173,6 +174,11 @@ namespace LorisProcessor
 				CURRENT_SETUP();
 
 			lorisManager.processCustom(CURRENT_FILE, CURRENT_FUNCTION);
+		}
+		
+		if(isDefined(CURRENT_POST))
+		{
+			CURRENT_POST();
 		}
 		
 		worker.setStatusMessage("Resynthesizing...");

@@ -28,8 +28,8 @@
     <Processor Type="AudioLooper" ID="Original" Bypassed="0" Gain="1.0" Balance="0.0"
                VoiceLimit="256.0" KillFadeTime="20.0" IconColour="0" SyncMode="1.0"
                PitchTracking="0.0" LoopEnabled="0.0" RootNote="64.0" SampleStartMod="0.0"
-               Reversed="0.0" FileName="{PROJECT_FOLDER}sound_examples/flute.wav"
-               min="0" max="243743" loopStart="0" loopEnd="243743">
+               Reversed="0.0" FileName="{PROJECT_FOLDER}sound_examples/rhodes.wav"
+               min="0" max="392913" loopStart="0" loopEnd="392913">
       <ChildProcessors>
         <Processor Type="MidiProcessorChain" ID="Midi Processor" Bypassed="0">
           <ChildProcessors/>

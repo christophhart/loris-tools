@@ -37,11 +37,19 @@ namespace PitchLock
 		s.setControlCallback(onPitchLockSlider);
 	}
 	
+	inline function postProcess()
+	{
+		Console.print("CREATE PATH");
+		local pitchPath = LorisProcessor.lorisManager.createEnvelopePaths(LorisProcessor.CURRENT_FILE, "rootFrequency", 0)[0];
+		
+		BufferPreview.setEnvelope(Content.getComponent("PreviewPanel"), pitchPath);
+	}
+	
 	
 	
 	inline function pitchLock(obj)
 	{
-		obj.frequency *= pitchFactor;
+		
 		
 		obj.bandwidth *= noiseGain;
 		
@@ -51,6 +59,7 @@ namespace PitchLock
 		
 		obj.frequency = pitchLockAmount * lockedFrequency + (1.0 - pitchLockAmount) * obj.frequency;
 		
+		obj.frequency *= pitchFactor;
 		
 	}
 	
@@ -58,6 +67,8 @@ namespace PitchLock
 	{
 		if(index == 1)
 		{
+			LorisProcessor.CURRENT_POST = postProcess;
+
 			LorisProcessor.CURRENT_FUNCTION = this;
 		}
 	});

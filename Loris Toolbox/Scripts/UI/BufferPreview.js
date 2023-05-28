@@ -29,6 +29,12 @@ inline function setBuffer(unused, unused, file)
 }
 
 
+inline function setEnvelope(panel, env)
+{
+	panel.data.envelope = env;
+	panel.repaint();
+}
+
 inline function setResynthesisedBuffer(panel, bufferData, samplerate)
 {
 	local isMultiChannel = isDefined(bufferData[0].length);
@@ -177,6 +183,13 @@ inline function make(name)
 			g.drawVerticalLine(x, 0.0, h);
 			
 			
+			
+		}
+		
+		if(this.data.envelope)
+		{
+			g.setColour(this.get("itemColour"));
+			g.drawPath(this.data.envelope, this.getLocalBounds(0), 2.0);
 			
 		}
 	});
