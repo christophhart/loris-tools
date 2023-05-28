@@ -2,6 +2,8 @@
 
 using namespace juce;
 
+
+
 //==============================================================================
 MainComponent::MainComponent():
   fc("File", File(), true, false, false, "*", "", "Select audio file to analyse"),
@@ -160,7 +162,16 @@ MainComponent::MainComponent():
         repaint();
     };
     
-    setSize (600, 400);
+    File audioFile("/Users/christophhart/Development/loris-tools/Loris Toolbox/AudioFiles/sound_examples/piano 2.wav");
+    
+    for(int i = 0; i < 8; i++)
+    {
+        pathColours[i] = Colours::red.withSaturation(0.7f).withBrightness(0.4f).withAlpha(0.3f).withHue(Random::getSystemRandom().nextFloat());
+    }
+    
+    setSize (900, 600);
+    
+    fc.setCurrentFile(audioFile, true);
 }
 
 MainComponent::~MainComponent()
@@ -170,13 +181,17 @@ MainComponent::~MainComponent()
 //==============================================================================
 void MainComponent::paint (juce::Graphics& g)
 {
-    // (Our component is opaque, so we must completely fill the background with a solid colour)
-    g.fillAll(Colour(0xff222222));
-
-    g.setFont (GLOBAL_FONT());
-    g.setColour (juce::Colours::white);
     
-    g.drawText (error, errorArea, juce::Justification::centred, true);
+}
+
+void MainComponent::paintOverChildren(juce::Graphics& g)
+{
+    for(int i = 0; i < harmonics.size(); i++)
+    {
+        g.setColour(Colour(pathColours[i]).withAlpha(0.15f));
+        g.fillPath(harmonics[i]);
+    }
+    
 }
 
 void MainComponent::resized()
@@ -203,8 +218,13 @@ void MainComponent::resized()
     
     thumbnail.setBounds(b.reduced(3));
     
-    
-    
+    if(!harmonics.isEmpty())
+    {
+        auto t = thumbnail.getBounds().toFloat();
+        
+        for(auto& e: harmonics)
+            e.scaleToFit(t.getX(), t.getY(), t.getWidth(), t.getHeight(), false);
+    }
     
     
     // This is called when th MainComponent is resized.
