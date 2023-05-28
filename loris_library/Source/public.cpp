@@ -22,16 +22,9 @@
 static loris2hise::MultichannelPartialList* getExisting(void* state, const char* file)
 {
 	auto typed = (loris2hise::LorisState*)state;
-
-	juce::File f(file);
-
-	for (auto af : typed->analysedFiles)
-	{
-		if (af->matches(f))
-			return af;
-	}
-
-	return nullptr;
+    juce::File f(file);
+    
+    return typed->getExisting(f);
 }
 
 extern "C"
@@ -103,7 +96,7 @@ bool loris_process(void* state, const char* file, const char* command, const cha
 
 bool loris_process_custom(void* state, const char* file, void* obj, void* function)
 {
-	loris2hise::Helpers::CustomFunction f = (loris2hise::Helpers::CustomFunctionType)function;
+	loris2hise::CustomFunctionArgs::Function f = (loris2hise::CustomFunctionArgs::FunctionType)function;
 
 	loris2hise::LorisState::resetState(state);
 
@@ -115,16 +108,26 @@ bool loris_process_custom(void* state, const char* file, void* obj, void* functi
 	return false;
 }
 
-bool loris_config(void* state, const char* setting, const char* value)
+bool loris_set(void* state, const char* setting, const char* value)
 {
-	loris2hise::LorisState::resetState(state);
-
-	auto typed = (loris2hise::LorisState*)state;
-
-	juce::String v(value);
-
-	return typed->setOption(juce::Identifier(setting), juce::var(v));
+    loris2hise::LorisState::resetState(state);
+    
+    auto typed = (loris2hise::LorisState*)state;
+    
+    juce::String v(value);
+    
+    return typed->setOption(juce::Identifier(setting), juce::var(v));
 }
+
+double loris_get(void* state, const char* setting)
+{
+    loris2hise::LorisState::resetState(state);
+
+    auto typed = (loris2hise::LorisState*)state;
+
+    return typed->getOption(juce::Identifier(setting));
+}
+
 
 bool loris_synthesize(void* state, const char* file, float* dst, int& numChannels, int& numSamples)
 {
@@ -155,23 +158,82 @@ bool loris_synthesize(void* state, const char* file, float* dst, int& numChannel
 	return false;
 }
 
+bool loris_create_envelope(void* state, const char* file, const char* parameter, int label, float* dst, int& numChannels, int& numSamples)
+{
+    loris2hise::LorisState::resetState(state);
+    
+    numSamples = 0;
+    numChannels = 0;
+    
+    if (auto s = getExisting(state, file))
+    {
+        jassert(s->getRequiredBytes() > 0);
+        
+        auto buffer = s->renderEnvelope(juce::Identifier(parameter), label);
+        
+        for (int i = 0; i < buffer.getNumChannels(); i++)
+        {
+            juce::FloatVectorOperations::copy(dst, buffer.getReadPointer(i), buffer.getNumSamples());
+            dst += buffer.getNumSamples();
+        }
+        
+        numSamples = s->getNumSamples();
+        numChannels = s->getNumChannels();
+        
+        return true;
+    }
+    
+    return false;
+    
+}
+
+bool loris_snapshot(void* state, const char* file, double time, const char* parameter, double* buffer, int& numChannels, int& numHarmonics)
+{
+    loris2hise::LorisState::resetState(state);
+    
+    numChannels = 0;
+    numHarmonics = 0;
+    
+    if (auto s = getExisting(state, file))
+    {
+        jassert(s->getRequiredBytes() > 0);
+        
+        juce::Identifier id(parameter);
+        
+        return s->createSnapshot(id, time, buffer, numChannels, numHarmonics);
+    }
+ 
+    return false;
+}
+
+bool loris_prepare(void* state, const char* file, bool removeUnlabeled)
+{
+    loris2hise::LorisState::resetState(state);
+    
+    if (auto s = getExisting(state, file))
+    {
+        s->prepareToMorph(removeUnlabeled);
+        return true;
+    }
+    
+    return false;
+}
+
 bool getLastMessage(void* state, char* buffer, int maxlen)
 {
 	auto typed = ((loris2hise::LorisState*)state);
 
-	auto hasSomething = !typed->messages.isEmpty();
-
-	if (hasSomething)
+    auto lastMessage = typed->getLastMessage();
+    
+	if (lastMessage.isNotEmpty())
 	{
-		auto m = typed->messages[0];
-
 		memset(buffer, 0, maxlen);
-		memcpy(buffer, m.getCharPointer().getAddress(), m.length());
+		memcpy(buffer, lastMessage.getCharPointer().getAddress(), lastMessage.length());
 
-		typed->messages.remove(0);
+        return true;
 	}
 
-	return hasSomething;
+    return false;
 }
 
 void getIdList(char* buffer, int maxlen, bool getOptions)
@@ -190,7 +252,8 @@ void getIdList(char* buffer, int maxlen, bool getOptions)
 
 const char* getLastError(void* state)
 {
-	return ((loris2hise::LorisState*)state)->lastError.getErrorMessage().getCharPointer().getAddress();
+    auto typed = ((loris2hise::LorisState*)state);
+    return typed->getLastError();
 }
 
 }

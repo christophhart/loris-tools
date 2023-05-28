@@ -50,17 +50,36 @@ DLL_EXPORT const char* getLibraryVersion();
 DLL_EXPORT const char* getLorisVersion();
 
 
-
+/** Analyses the given file with the given root frequency. You need to call this method before processing and synthesizing.
+ 
+    - state the state context created with createLorisState().
+    - file the full path name
+    - rootFrequency - the estimated frequency of the samples. This will be used for setting the frequency resolution and frequency drift
+ 
+    Depending on the `enablecache` optiion, the analysed partials will be cached and reused when the function is called again
+    with the same filename.
+*/
 DLL_EXPORT bool loris_analyze(void* state, char* file, double rootFrequency);
 
+/** Processes the analyzed partials with a predefined function.
+ 
+    - state: the state context pointer
+    - file: the full path name
+    - command: the function you want to execute.
+ 
+    For an overview of the available functions and JSON configuration take a look at ScopedPartialList::process.
+*/
 DLL_EXPORT bool loris_process(void* state, const char* file,
                               const char* command, const char* json);
 
+/** Processes the analyzed partials with a custom function. */
 DLL_EXPORT bool loris_process_custom(void* state, const char* file, void* obj, void* function);
 
-DLL_EXPORT bool loris_config(void* state, const char* setting, const char* value);
+DLL_EXPORT bool loris_set(void* state, const char* setting, const char* value);
 
-/** Returns the number of bytes that you need to allocate before calling synthesise. */
+DLL_EXPORT double loris_get(void* state, const char* setting);
+
+/** Returns the number of bytes that you need to allocate before calling loris_synthesize or loris_create_envelope. */
 DLL_EXPORT size_t getRequiredBytes(void* state, const char* file);
 
 /** Synthesises the partial list for the given file. 
@@ -73,6 +92,26 @@ DLL_EXPORT size_t getRequiredBytes(void* state, const char* file);
 	numSamples - will be set to the number of samples
 */
 DLL_EXPORT bool loris_synthesize(void* state, const char* file, float* dst, int& numChannels, int& numSamples);
+
+/** Creates a audio-rate envelope for each channel of the given parameter (bandwidth, phase, frequency, amp) for the given file.
+ 
+    If you've channelized the file, you can also pass in "parameter[idx]" to get the envelope for the given harmonic for the given index. */
+DLL_EXPORT bool loris_create_envelope(void* state, const char* file, const char* parameter, int label, float* dst, int& numChannels, int& numSamples);
+
+/** Creates a snapshot (=list of values for all partials) of the given parameter at the given time.
+
+    Useful for creating wavetables from the analysed data.
+*/
+DLL_EXPORT bool loris_snapshot(void* state, const char* file, double time, const char* parameter, double* buffer, int& numChannels, int& numHarmonics);
+
+#if LATER
+/** Sets a pointer to a progress value that will be updated inside the process call. Make sure to reset this to nullptr before the target object is destroyed!
+*/
+DLL_EXPORT void setProgressCounter(void* state, double* progress);
+#endif
+
+/** Prepares an audio file for morphing. If removeUnlabeled is true, then all non-labeled partials will be removed. */
+DLL_EXPORT bool loris_prepare(void* state, const char* file, bool removeUnlabeled);
 
 DLL_EXPORT bool getLastMessage(void* state, char* buffer, int maxlen);
 

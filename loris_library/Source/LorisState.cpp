@@ -50,7 +50,16 @@ void LorisState::resetState(void* state)
 	((LorisState*)state)->lastError = juce::Result::ok();
 }
 
+MultichannelPartialList* LorisState::getExisting(const File& f)
+{
+    for (auto af : analysedFiles)
+    {
+        if (af->matches(f))
+            return af;
+    }
 
+    return nullptr;
+}
 
 void LorisState::reportError(const char* msg)
 {
@@ -78,9 +87,11 @@ bool LorisState::analyse(const juce::File& audioFile, double rootFrequency)
 	juce::AudioFormatManager m;
 	m.registerBasicFormats();
 
+    auto driftFactor = std::pow(2.0, currentOption.freqdrift / 1200.0);
+    
 	analyzer_configure(rootFrequency * 0.8, rootFrequency);
 	//analyzer_setWindowWidth(rootFrequency * currentOption.windowwidth);
-	analyzer_setFreqDrift(0.2 * rootFrequency);
+    analyzer_setFreqDrift(rootFrequency * 0.25);
 
 	currentOption.initLorisParameters();
 
@@ -115,7 +126,8 @@ bool LorisState::analyse(const juce::File& audioFile, double rootFrequency)
 		}
 
 		newEntry->saveAsOriginal();
-
+        newEntry->prepareToMorph();
+        
 		analysedFiles.add(newEntry);
 
 		messages.add("... Analysed OK");
@@ -123,6 +135,16 @@ bool LorisState::analyse(const juce::File& audioFile, double rootFrequency)
 	}
 
 	return false;
+}
+
+double LorisState::getOption(const juce::Identifier &id) const
+{
+    juce::String msg;
+    msg << "Get option " << id;
+
+    Helpers::logMessage(msg.getCharPointer().getAddress());
+    
+    return (double)currentOption.toJSON()[id];
 }
 
 bool LorisState::setOption(const juce::Identifier& id, const juce::var& data)
@@ -153,5 +175,8 @@ bool LorisState::setOption(const juce::Identifier& id, const juce::var& data)
 
 	return true;
 }
+
+
+
 
 }

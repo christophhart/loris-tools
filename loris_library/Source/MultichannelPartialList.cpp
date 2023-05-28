@@ -132,7 +132,7 @@ void MultichannelPartialList::checkArgs(bool condition, const juce::String& erro
 	}
 }
 
-bool MultichannelPartialList::processCustom(void* obj, const Helpers::CustomFunction& f)
+bool MultichannelPartialList::processCustom(void* obj, const CustomFunctionArgs::Function& f)
 {
 	int channelIndex = 0;
 
@@ -147,9 +147,9 @@ bool MultichannelPartialList::processCustom(void* obj, const Helpers::CustomFunc
 				auto t = convertSecondsToTime(iter.time());
 				auto& b = iter.breakpoint();
 
-				Helpers::CustomFunctionArgs a(obj, b, channelIndex, partialIndex, sampleRate, t, rootFrequency);
+				CustomFunctionArgs a(obj, b, channelIndex, partialIndex, sampleRate, t, rootFrequency);
 
-				if (f(a))
+                if (f(a))
 					return true;
 
 				iter.time();
@@ -167,6 +167,7 @@ bool MultichannelPartialList::processCustom(void* obj, const Helpers::CustomFunc
 
 	return false;
 }
+
 
 bool MultichannelPartialList::process(const juce::Identifier& command, const juce::var& data)
 {
@@ -337,6 +338,168 @@ juce::AudioSampleBuffer MultichannelPartialList::synthesize()
 	return output;
 }
 
+void MultichannelPartialList::prepareToMorph(bool removeUnlabeled)
+{
+    if(preparedForMorph)
+        return;
+    
+    Helpers::logMessage("Prepare partial list for morphing");
+    
+    for(auto p: list)
+    {
+        LinearEnvelope* env = createF0Estimate(p, rootFrequency * (1.0 + options.freqdrift), rootFrequency / (1.0 + options.freqdrift), options.hoptime * 10.0);
+        
+        channelize(p, env, 1);
+        destroyLinearEnvelope(env);
+    }
+        
+    for(auto p: list)
+    {
+        collate(p);
+        
+        
+        sift(p);
+        distill(p);
+        
+        if(removeUnlabeled)
+            removeLabeled(p, 0);
+        
+        sortByLabel(p);
+    }
+    
+    preparedForMorph = true;
+}
+
+juce::AudioSampleBuffer MultichannelPartialList::renderEnvelope(const juce::Identifier &parameter, int partialIndex)
+{
+    AudioSampleBuffer b(getNumChannels(), getNumSamples());
+    b.clear();
+    
+    if(parameter == ParameterIds::rootFrequency)
+    {
+        for(auto e: rootFrequencyEnvelopes)
+            destroyLinearEnvelope(e);
+        
+        rootFrequencyEnvelopes.clear();
+     
+        int c = 0;
+        
+        for(auto pl: list)
+        {
+            const var hoptimeSamples = options.hoptime * sampleRate;
+            
+            LinearEnvelope* env = createF0Estimate(pl, rootFrequency * (1.0 + options.freqdrift), rootFrequency / (1.0 + options.freqdrift), options.hoptime * 4.0);
+            
+            for(int i = 0; i < b.getNumSamples(); i++)
+                b.setSample(c, i, linearEnvelope_valueAt(env, i / sampleRate) / rootFrequency);
+            
+            rootFrequencyEnvelopes.add(env);
+            c++;
+        }
+    }
+    else
+    {
+        prepareToMorph();
+        
+        int c = 0;
+        for(auto pl: list)
+        {
+            bool found = false;
+            
+            for(auto p: *pl)
+            {
+                if(partialIndex == (p.label() - 1))
+                {
+                    found = true;
+                    
+                    const int sampleDelta = options.hoptime * sampleRate;
+                    SmoothedValue<float> ramp;
+                    std::function<double(Partial*, double)> vf;
+                    
+                    ramp.reset(sampleRate, options.hoptime);
+                    
+                    if(parameter == ParameterIds::phase)
+                        vf = partial_phaseAt;
+                    if(parameter == ParameterIds::frequency)
+                        vf = partial_frequencyAt;
+                    if(parameter == ParameterIds::gain)
+                        vf = partial_amplitudeAt;
+                    if(parameter == ParameterIds::bandwidth)
+                        vf = partial_bandwidthAt;
+                        
+                    for(int i = 0; i < getNumSamples(); i++)
+                    {
+                        if(i % sampleDelta == 0)
+                        {
+                            auto t = (double)i / sampleRate;
+                            ramp.setTargetValue((float)vf(&p, t));
+                        }
+                            
+                        b.setSample(c, i, ramp.getNextValue());
+                    }
+                }
+            }
+            
+            if(!found)
+            {
+                String msg;
+                msg <<"Can't find partial with label " << String(partialIndex);
+                Helpers::reportError(msg.getCharPointer().getAddress());
+            }
+        }
+        
+        c++;
+    }
+    
+    
+    
+    return b;
+}
+
+bool MultichannelPartialList::createSnapshot(const juce::Identifier &parameter, double timeSeconds, double *buffer, int& numChannels, int &numHarmonics)
+{
+    auto timeToUse = convertSecondsToTime(timeSeconds);
+    
+    numChannels = getNumChannels();
+    
+    
+    
+    prepareToMorph();
+    
+    std::function<double(Partial*, double)> vf;
+    
+    if(parameter == ParameterIds::phase)
+        vf = partial_phaseAt;
+    if(parameter == ParameterIds::frequency)
+        vf = partial_frequencyAt;
+    if(parameter == ParameterIds::gain)
+        vf = partial_amplitudeAt;
+    if(parameter == ParameterIds::bandwidth)
+        vf = partial_bandwidthAt;
+    
+    int index = 1;
+    
+    int numMaxHarmonics = 0;
+    
+    for(auto& pl: list)
+        numMaxHarmonics = jmax<int>(numMaxHarmonics, pl->size());
+    
+    for(auto& pl: list)
+    {
+        int thisNum = 0;
+        
+        for(auto& p: *pl)
+            *buffer++ = vf(&p, timeToUse);
+        
+        for(int i = thisNum; i < numMaxHarmonics; i++)
+            *buffer++ = 0.0f;
+    }
+    
+    numHarmonics = numMaxHarmonics;
+    
+    return true;
+}
+
 bool MultichannelPartialList::matches(const juce::File& f) const
 {
 	return f.getFullPathName() == filename;
@@ -356,5 +519,14 @@ void MultichannelPartialList::setOptions(const Options& newOptions)
 {
 	options = newOptions;
 }
+
+
+
+
+
+
+
+
+
 
 }

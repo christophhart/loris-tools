@@ -22,7 +22,7 @@
 #include "Helpers.h"
 #include "MultichannelPartialList.h"
 
-#include <JuceHeader.h>
+#include "JuceHeader.h"
 
 namespace loris2hise {
 using namespace juce;
@@ -34,32 +34,53 @@ using namespace juce;
  */
 struct LorisState
 {
-	
+    LorisState();
+    
+    ~LorisState();
+    
+    static LorisState* getCurrentInstance(bool forceCreate = false);
+    
+    static void resetState(void* state);
+    
+    void reportError(const char* msg);
+    
+    bool analyse(const juce::File& audioFile, double rootFrequency);
+    
+    bool setOption(const juce::Identifier& id, const juce::var& data);
+    
+    double getOption(const juce::Identifier& id) const;
+    
+    MultichannelPartialList* getExisting(const File& f);
 
-	LorisState();
-
-	~LorisState();
-
-	static LorisState* getCurrentInstance(bool forceCreate = false);
-
-	static void resetState(void* state);
-
-	void reportError(const char* msg);
-
-	bool analyse(const juce::File& audioFile, double rootFrequency);
-
-	bool setOption(const juce::Identifier& id, const juce::var& data);
-
-	Options currentOption;
-
-	juce::Result lastError;
-
-	juce::OwnedArray<MultichannelPartialList> analysedFiles;
-
-	juce::StringArray messages;
-
+    const char* getLastError() const
+    {
+        return lastError.getErrorMessage().getCharPointer().getAddress();
+    }
+    
+    String getLastMessage()
+    {
+        if(!messages.isEmpty())
+        {
+            auto lastMessage = messages[messages.size()-1];
+            messages.remove(messages.size()-1);
+            return lastMessage;
+        }
+        
+        return {};
+    }
+    
 private:
 
+    friend class Helpers;
+    
+    Options currentOption;
+
+    juce::Result lastError;
+
+    juce::OwnedArray<MultichannelPartialList> analysedFiles;
+
+    juce::StringArray messages;
+    
 	static LorisState* currentInstance;
 
 	JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(LorisState);
