@@ -16,10 +16,12 @@ clickpreview.attachToComponentMouseEvents("OriginalWaveform", "Clicks Only", "pr
 
 reg lastId = -1;
 
+reg CURRENT_NOTE = 60;
+
 clickpreview.addListener("play note", "play note", function(component, event)
 {
 	if(event.clicked)
-		lastId = Synth.playNote(60, 127);
+		lastId = Synth.playNote(CURRENT_NOTE, 127);
 	else
 		Synth.noteOffByEventId(lastId);
 });

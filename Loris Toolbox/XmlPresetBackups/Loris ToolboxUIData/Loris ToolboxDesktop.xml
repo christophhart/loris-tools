@@ -6,8 +6,7 @@
              textColour="4294967295" itemColour2="4280690214" locked="1">
     <Component type="ScriptPanel" id="ResynthesisePage" x="0.0" y="50.0" width="880.0"
                height="330.0" parentComponent="BG" bgColour="0" itemColour="0"
-               itemColour2="0" textColour="0" borderSize="0.0" borderRadius="0.0"
-               visible="0">
+               itemColour2="0" textColour="0" borderSize="0.0" borderRadius="0.0">
       <Component type="ScriptSlider" id="ConfigSlider1" x="61.0" y="222.0" parentComponent="ResynthesisePage"
                  showTextBox="0" style="Horizontal" width="130.0" height="22.0"
                  itemColour="4290279467" text="Window Width" mode="NormalizedPercentage"
@@ -39,7 +38,8 @@
     </Component>
     <Component type="ScriptPanel" id="PitchLockPage" x="0.0" y="50.0" width="880.0"
                height="320.0" parentComponent="BG" bgColour="0" itemColour="0"
-               itemColour2="0" textColour="0" borderSize="0.0" borderRadius="0.0">
+               itemColour2="0" textColour="0" borderSize="0.0" borderRadius="0.0"
+               visible="0">
       <Component type="ScriptSlider" id="PitchLockAmount" x="220.0" y="222.0"
                  parentComponent="PitchLockPage" showTextBox="0" style="Horizontal"
                  width="130.0" height="22.0" itemColour="4278422015" text="Pitch Lock"
@@ -90,14 +90,14 @@
                enableRange="0" parentComponent="BG" saveInPreset="0" tooltip="The original audio file. Click to play"/>
     <Component type="ScriptPanel" id="PreviewPanel" x="10.0" y="98.0" width="850.0"
                height="130.0" parentComponent="BG" tooltip="The preview of the resynthesized audio file. Click to play."
-               allowCallbacks="Clicks &amp; Hover" itemColour="4278422015"/>
+               allowCallbacks="Clicks &amp; Hover" itemColour="4290279467"/>
     <Component type="ScriptFloatingTile" id="Tooltips" x="2.0" y="573.0" parentComponent="BG"
                ContentType="TooltipPanel" bgColour="3684408" itemColour="872415231"
                itemColour2="0" textColour="3439329279" height="24.0" width="790.0"
                Font="Lato"/>
     <Component type="ScriptFloatingTile" id="MasterPeak" x="879.0" y="41.0"
-               width="20.0" height="530.0" ContentType="MatrixPeakMeter" bgColour="4278190080"
-               itemColour="4283782485" itemColour2="4280427042" Data="{&#10;  &quot;ProcessorId&quot;: &quot;Loris Toolbox&quot;,&#10;  &quot;Index&quot;: -1,&#10;  &quot;FollowWorkspace&quot;: false,&#10;  &quot;SegmentLedSize&quot;: 2.0,&#10;  &quot;UpDecayTime&quot;: 0.0,&#10;  &quot;DownDecayTime&quot;: 1100.0,&#10;  &quot;UseSourceChannels&quot;: true,&#10;  &quot;SkewFactor&quot;: 0.3499999940395355,&#10;  &quot;PaddingSize&quot;: 1.0,&#10;  &quot;ShowMaxPeak&quot;: 1.0,&#10;  &quot;ChannelIndexes&quot;: [&#10;    0,&#10;    1&#10;  ]&#10;}"
+               width="20.0" height="530.0" ContentType="MatrixPeakMeter" bgColour="4281545523"
+               itemColour="4287137928" itemColour2="4282400832" Data="{&#10;  &quot;ProcessorId&quot;: &quot;Loris Toolbox&quot;,&#10;  &quot;Index&quot;: -1,&#10;  &quot;FollowWorkspace&quot;: false,&#10;  &quot;SegmentLedSize&quot;: 2.0,&#10;  &quot;UpDecayTime&quot;: 0.0,&#10;  &quot;DownDecayTime&quot;: 1100.0,&#10;  &quot;UseSourceChannels&quot;: true,&#10;  &quot;SkewFactor&quot;: 0.3499999940395355,&#10;  &quot;PaddingSize&quot;: 1.0,&#10;  &quot;ShowMaxPeak&quot;: 1.0,&#10;  &quot;ChannelIndexes&quot;: [&#10;    0,&#10;    1&#10;  ]&#10;}"
                parentComponent="BG"/>
     <Component type="ScriptPanel" id="ZoomPanel" x="876" y="576" width="24"
                height="24" allowCallbacks="All Callbacks" parentComponent="BG"/>
@@ -137,7 +137,7 @@
     <Component type="ScriptPanel" id="ProgressPanel" x="370.0" y="240.0" width="130.0"
                height="130.0" parentComponent="BG"/>
     <Component type="ScriptButton" id="RefreshButton" x="390.0" y="260.0" parentComponent="BG"
-               width="90.0" height="90.0" textColour="4278422015" tooltip="Resynthesise the audio file with the current parameters."
+               width="90.0" height="90.0" textColour="4290279467" tooltip="Resynthesise the audio file with the current parameters."
                isMomentary="1" saveInPreset="0" text="refresh"/>
     <Component type="ScriptButton" id="PreviewDiffButton" x="530.0" y="329.0"
                width="109.0" height="20.0" parentComponent="BG" text="Solo Noise"
@@ -151,11 +151,11 @@
              mode="Decibel" min="-100.0" max="0.0" stepSize="0.1000000014901161"
              suffix=" dB" middlePosition="-18.0" itemColour="1728053247" saveInPreset="0"/>
   <Component type="ScriptButton" id="SaveButton" x="834.0" y="293.0" width="24.0"
-             height="24.0" saveInPreset="0" isMomentary="1" enableMidiLearn="0"
-             text="save"/>
+             height="24.0" saveInPreset="0" enableMidiLearn="0" text="save"
+             itemColour="4290279467"/>
   <Component type="ScriptLabel" id="SuffixLabel" x="721.0" y="295.0" height="20.0"
              width="108.0" alignment="left" bgColour="318767104" textColour="2751463423"
-             fontName="Lato" fontStyle="Bold" text="_D#2" tooltip="The suffix that will be appended to the filename on save."
+             fontName="Lato" fontStyle="Bold" text="_low" tooltip="The suffix that will be appended to the filename on save."
              fontSize="12.0"/>
   <Component type="ScriptPanel" id="SettingsPopup" x="602.0" y="42.0" itemColour="3256885280"
              itemColour2="4280887593" borderSize="1.0" borderRadius="3.0"
@@ -165,4 +165,15 @@
                itemColour2="0" Data="{&#10;  &quot;Driver&quot;: true,&#10;  &quot;Device&quot;: true,&#10;  &quot;Output&quot;: true,&#10;  &quot;BufferSize&quot;: true,&#10;  &quot;SampleRate&quot;: true,&#10;  &quot;GlobalBPM&quot;: false,&#10;  &quot;StreamingMode&quot;: false,&#10;  &quot;ScaleFactor&quot;: true,&#10;  &quot;VoiceAmountMultiplier&quot;: false,&#10;  &quot;ClearMidiCC&quot;: false,&#10;  &quot;SampleLocation&quot;: false,&#10;  &quot;DebugMode&quot;: false,&#10;  &quot;UseOpenGL&quot;: false,&#10;  &quot;ScaleFactorList&quot;: [&#10;    0.5,&#10;    0.75,&#10;    1.0,&#10;    1.25,&#10;    1.5,&#10;    2.0&#10;  ]&#10;}"
                width="284.0" height="254.0" Font="Lato" FontSize="12.0" parentComponent="SettingsPopup"/>
   </Component>
+  <Component type="ScriptButton" id="DirectoryButton" x="670.0" y="330.0"
+             width="190.0" height="20.0" isMomentary="1" tooltip="Set the output directory for the synthesised files"
+             text="C:\Users\chris\Desktop"/>
+  <Component type="ScriptComboBox" id="SampleMapList" x="341.0" y="533.0"
+             max="2" height="20.0" items="piano_trumpet_vibra&#10;violin_musicbox"
+             width="188.0" saveInPreset="0" visible="0"/>
+  <Component type="ScriptButton" id="UseSampleMaps" x="731.0" y="533.0" text="Use SampleMaps"
+             height="20.0" saveInPreset="0"/>
+  <Component type="ScriptComboBox" id="SampleSelection" x="534.0" y="533.0"
+             height="20.0" items="All Samples&#10;{PROJECT_FOLDER}musicbox.aiff&#10;{PROJECT_FOLDER}violin.aiff"
+             width="188.0" saveInPreset="0" max="3" visible="0"/>
 </ContentProperties>

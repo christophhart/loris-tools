@@ -40,9 +40,9 @@ namespace PitchLock
 	inline function postProcess()
 	{
 		Console.print("CREATE PATH");
-		local pitchPath = LorisProcessor.lorisManager.createEnvelopePaths(LorisProcessor.CURRENT_FILE, "rootFrequency", 0)[0];
+		//local pitchPath = LorisProcessor.lorisManager.createEnvelopePaths(LorisProcessor.CURRENT_FILE, "rootFrequency", 0)[0];
 		
-		BufferPreview.setEnvelope(Content.getComponent("PreviewPanel"), pitchPath);
+		//BufferPreview.setEnvelope(Content.getComponent("PreviewPanel"), pitchPath);
 	}
 	
 	

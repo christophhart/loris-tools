@@ -196,7 +196,7 @@ inline function make(name)
 	
 	OriginalWatcher.registerAtBroadcaster(p, "update preview", setBuffer);
 	
-	Manifest.pageBroadcaster.addComponentPropertyListener(p, "itemColour", "setItemColour", function(index, value)
+	Manifest.pageBroadcaster.addComponentPropertyListener([p, Content.getComponent("SaveButton")], "itemColour", "setItemColour", function(index, value)
 	{
 		return Manifest.PAGE_COLOURS[value];
 	});

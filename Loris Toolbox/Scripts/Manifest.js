@@ -136,10 +136,11 @@ namespace Manifest
 		}
 			
 		
-		
+		if(obj.value)
+			alpha = Math.sqrt(alpha);
 		
 
-		g.setColour(Colours.withAlpha(Colours.white, alpha));
+		g.setColour(Colours.withAlpha(obj.value ? obj.itemColour1 : Colours.white, alpha));
 		g.fillPath(Paths.icons[obj.text], Rect.reduced(obj.area, margin));
 		
 	});
@@ -382,4 +383,24 @@ namespace Manifest
 	};
 	
 	Content.getComponent("OriginalPitchSlider").setControlCallback(onOriginalPitchSliderControl);
+	
+	const var directoryLaf = Content.createLocalLookAndFeel();
+	
+	directoryLaf.registerFunction("drawToggleButton", function(g, obj)
+	{
+		g.setColour(0x22000000);
+		
+
+		g.fillRect(obj.area);
+
+		if(obj.over)
+			obj.text = "Click to browse";
+
+		g.setFontWithSpacing("Lato", 12.0, 0.03);
+		g.setColour(0x88FFFFFF);
+		g.drawAlignedText(obj.text, obj.area, "centred");
+	});
+	
+	Content.getComponent("DirectoryButton").setLocalLookAndFeel(directoryLaf);
+	
 	

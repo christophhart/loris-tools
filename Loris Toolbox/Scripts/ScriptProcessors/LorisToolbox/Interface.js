@@ -65,12 +65,15 @@ namespace HarmonicScaler
 	{
 		local idx = parseInt(Math.round(obj.frequency / obj.rootFrequency)-1);
 		
+		idx = Math.min(Harmonics.getNumSliders()-1, idx);
+		
 		local harmonicGain = Harmonics.getSliderValueAt(idx);
 		
 		if(idx >= 0 && idx < Harmonics.getNumSliders())
 		{
 			harmonicGain *= randHarm[idx];
 			obj.gain *= harmonicGain;
+			obj.bandwith = 0.0;
 		}
 	}
 	

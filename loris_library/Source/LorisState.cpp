@@ -126,7 +126,7 @@ bool LorisState::analyse(const juce::File& audioFile, double rootFrequency)
 		}
 
 		newEntry->saveAsOriginal();
-        newEntry->prepareToMorph();
+        //newEntry->prepareToMorph();
         
 		analysedFiles.add(newEntry);
 

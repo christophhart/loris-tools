@@ -2,6 +2,112 @@ namespace LorisProcessor
 {
 	const var ProgressPanel = Content.getComponent("ProgressPanel");
 	
+	const var Sampler1 = Synth.getSampler("Sampler1");
+	
+	
+	const var SampleMapList = Content.getComponent("SampleMapList");
+	
+	SampleMapList.set("items", Sampler1.getSampleMapList().join("\n"));
+	
+	reg outputDirectory = FileSystem.getFolder(FileSystem.Desktop);
+	
+	inline function onDirectoryButtonControl(component, value)
+	{
+		if(!value)
+			return;
+
+		FileSystem.browseForDirectory(outputDirectory, function(newDir)
+		{
+			outputDirectory = newDir;
+			DirectoryButton.set("text", outputDirectory.toString(0));
+		});
+	};
+	
+	const var DirectoryButton = Content.getComponent("DirectoryButton");
+	
+	DirectoryButton.setControlCallback(onDirectoryButtonControl);
+	
+	
+	for(c in [Content.getComponent("SampleMapList"), Content.getComponent("UseSampleMaps"), Content.getComponent("SampleSelection")])
+	{
+		c.setLocalLookAndFeel(Manifest.defaultLaf);
+	}
+	
+	const var OriginalWaveform = Content.getComponent("OriginalWaveform");
+	
+	inline function onUseSampleMapsControl(component, value)
+	{
+		local l = [[Content.getComponent("ExampleLoad"),
+          Content.getComponent("RootNote"),
+          Content.getComponent("DetectPitchButton"),
+          Content.getComponent("OriginalPitchSlider")],
+         [Content.getComponent("SampleMapList"),
+          Content.getComponent("SampleSelection")]];
+
+		OriginalWaveform.set("processorId", value ? "Sampler1" : "Original");
+
+		if(!value)
+			OriginalWaveform.set("sampleIndex", 0);
+		
+
+		for(c in l[0])
+			c.set("visible", value == 0);
+		for(c in l[1])
+			c.set("visible", value == 1);
+	};
+	
+	const var UseSampleMaps = Content.getComponent("UseSampleMaps");
+	
+	UseSampleMaps.setControlCallback(onUseSampleMapsControl);
+	
+	reg CURRENT_SAMPLE_LIST = [];
+	reg ALL_SAMPLES_MODE = false;
+	
+	inline function onSampleMapListControl(component, value)
+	{
+		if(value)
+		{
+			Sampler1.loadSampleMap(component.getItemText());
+			Content.getComponent("SampleSelection").setValue(0);
+		}
+	};
+	
+	Content.getComponent("SampleMapList").setControlCallback(onSampleMapListControl);
+	
+	
+	inline function onSampleSelectionControl(component, value)
+	{
+		if(value == 0)
+			return;
+		else if(value == 1) // All Samples
+		{
+			OriginalWaveform.set("sampleIndex", -1);
+			ALL_SAMPLES_MODE = true;
+		}
+		else
+		{
+			ALL_SAMPLES_MODE = false;
+			CURRENT_FILE = FileSystem.fromReferenceString(component.getItemText(), FileSystem.Samples);
+			Console.print(CURRENT_FILE.toString(0));
+			
+			if(CURRENT_SAMPLE_LIST.length)
+			{
+				OriginalWatcher.CURRENT_NOTE = CURRENT_SAMPLE_LIST[value-2].get(Sampler1.Root);
+				
+				OriginalWaveform.set("sampleIndex", value - 2);
+				OriginalWaveform.sendRepaintMessage();
+				
+				if(isDefined(CURRENT_FILE))
+				{
+					//worker.callOnBackgroundThread(rebuild);
+				}
+			}
+		}
+	};
+	
+	Content.getComponent("SampleSelection").setControlCallback(onSampleSelectionControl);
+	
+	
 	ProgressPanel.setPaintRoutine(function(g)
 	{
 		if(this.data.alpha != 0.0)
@@ -37,6 +143,18 @@ namespace LorisProcessor
 		else
 		{
 			this.data.alphaDelta = -0.1;
+			
+			var list = ["All Samples"];
+			
+			CURRENT_SAMPLE_LIST = Sampler1.createSelection(".*");
+			
+			for(s in CURRENT_SAMPLE_LIST)
+				list.push(s.get(Sampler1.FileName));
+				
+			var c = Content.getComponent("SampleSelection");
+				
+			c.set("items", list.join("\n"));
+			c.setValue(1);
 		}
 			
 		this.repaint(); 
@@ -94,11 +212,27 @@ namespace LorisProcessor
 	
 	reg ooo;
 	
-	function rebuild(thread)
+	inline function saveBuffer(data, suffix)
 	{
-		PENDING = true;
+		if(!Manifest.SaveButton.getValue())
+			return;
 
-		var rootFreq = Engine.getFrequencyForMidiNoteNumber(rootNote.getValue() - 1);
+		local sr = CURRENT_FILE.loadAudioMetadata().SampleRate;
+		local prefix = CURRENT_FILE.toString(CURRENT_FILE.NoExtension);		
+		local ext = CURRENT_FILE.toString(CURRENT_FILE.Extension);
+		local target = outputDirectory.getChildFile(prefix + suffix + ext);
+		
+		target.writeAudioFile(data, sr, 24);
+		
+		
+		Console.print("SAVE TO " + target.toString(0));
+	}
+	
+	function rebuildFile(f)
+	{
+		var rootToUse = UseSampleMaps.getValue() ? OriginalWatcher.CURRENT_NOTE : rootNote.getValue() - 1;
+		
+		var rootFreq = Engine.getFrequencyForMidiNoteNumber(rootToUse);
 		var preserveNoise = RetainNoiseButton.getValue();
 		var previewDiff = PreviewDiffButton.getValue();
 
@@ -117,6 +251,7 @@ namespace LorisProcessor
 
 		var original;
 		var noise;
+		var originalTone;
 
 		
 
@@ -128,19 +263,23 @@ namespace LorisProcessor
 			
 			var isMultichannel = isDefined(original[0].length);
 			
-			var resyn = lorisManager.synthesise(CURRENT_FILE);
+			originalTone = lorisManager.synthesise(CURRENT_FILE);
+			
+			saveBuffer(originalTone, "_tone");
 			
 			if(isMultichannel)
 			{
 				for(i = 0; i < original.length; i++)
 				{
-					original[i] -= resyn[i];
+					original[i] -= originalTone[i];
 				}
 			}
 			else 
 			{
-				original -= resyn;
+				original -= originalTone[0];
 			}
+			
+			saveBuffer(original, "_noise");
 		}
 		
 		worker.setStatusMessage("Processing...");
@@ -226,17 +365,35 @@ namespace LorisProcessor
 			}
 		}
 		
-		
-		
 		BufferPreview.setResynthesisedBuffer(Content.getComponent("PreviewPanel"), buffer, CURRENT_FILE.loadAudioMetadata().SampleRate);
 		
-		worker.setProgress(1.0);
-		PENDING = false;
+		saveBuffer(buffer, Content.getComponent("SuffixLabel").get("text"));
 		
+		worker.setProgress(1.0);
 	}
 	
-	
-	
+	function rebuild(thread)
+	{
+		PENDING = true;
+
+		if(ALL_SAMPLES_MODE)
+		{
+			for(s in CURRENT_SAMPLE_LIST)
+			{
+				OriginalWatcher.CURRENT_NOTE = s.get(Sampler1.Root);
+				CURRENT_FILE = FileSystem.fromReferenceString(s.get(Sampler1.FileName), FileSystem.Samples);
+
+				Console.print("Rebuild " + CURRENT_FILE.toString(0) + " with root " + OriginalWatcher.CURRENT_NOTE);
+				rebuildFile(CURRENT_FILE);
+			}
+		}
+		else
+		{
+			rebuildFile(CURRENT_FILE);	
+		}
+
+		PENDING = false;		
+	}
 	
 	function detectPitch()
 	{
@@ -248,8 +405,13 @@ namespace LorisProcessor
 			
 			if(isMultiChannel)
 				data = data[0];
+			
+			Console.print(data[0]);
+			
 				
 			var pitch = data.detectPitch(CURRENT_FILE.loadAudioMetadata().SampleRate, data.length * 0.2, data.length * 0.6);
+			
+			Console.print(pitch);
 			
 			if(pitch != 0.0)
 			{
@@ -262,7 +424,7 @@ namespace LorisProcessor
 					if(ratio < 0.05)
 					{
 						Console.print("FOUND");
-						
+						Console.print(thisPitch);
 	
 						rootNote.setValue(i+1);
 						rootNote.sendRepaintMessage();
@@ -275,12 +437,13 @@ namespace LorisProcessor
 	
 	OriginalWatcher.broadcaster.addListener(worker, "update", function(unused, unused, file)
 	{
+		if(UseSampleMaps.getValue())
+			return;
+
 		CURRENT_FILE = FileSystem.fromReferenceString(file, FileSystem.AudioFiles);
 		
 		if(isDefined(CURRENT_FILE))
 		{
-			detectPitch();
-
 			this.callOnBackgroundThread(rebuild);
 		}
 	});
@@ -305,7 +468,7 @@ namespace LorisProcessor
 		
 		if(value)
 		{
-			OriginalWatcher.broadcaster.resendLastMessage(false);
+			worker.callOnBackgroundThread(rebuild);
 		}
 	}
 	

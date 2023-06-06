@@ -54,8 +54,8 @@ juce::StringArray Options::getTimeDomainOptions()
 
 void Options::initLorisParameters()
 {
-	hoptime = analyzer_getHopTime();
-	croptime = analyzer_getCropTime();
+	//hoptime = analyzer_getHopTime();
+	//croptime = analyzer_getCropTime();
 	freqfloor = analyzer_getFreqFloor();
 	ampfloor = analyzer_getAmpFloor();
 	sidelobes = analyzer_getSidelobeLevel();
