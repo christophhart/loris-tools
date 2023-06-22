@@ -90,6 +90,9 @@ struct Options
     
     /** The window width scale factor. */
 	double windowwidth = 1.0;
+
+	/** If this is true, it will also call the loris_setXXX methods. */
+	bool initialised = false;
 };
 
 /** This struct will be used as argument for the custom function. */

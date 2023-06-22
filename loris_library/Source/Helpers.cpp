@@ -80,14 +80,14 @@ bool Options::update(const juce::Identifier& id, const juce::var& value)
 		return true;
 	}
 
-	if (id == OptionIds::freqfloor) { freqfloor = (double)value; analyzer_setFreqFloor(freqfloor); return true; }
-	if (id == OptionIds::ampfloor) { ampfloor = (double)value; analyzer_setAmpFloor(ampfloor); return true; }
-	if (id == OptionIds::sidelobes) { sidelobes = (double)value; analyzer_setSidelobeLevel(sidelobes); return true; }
+	if (id == OptionIds::freqfloor) { freqfloor = (double)value; if(initialised) analyzer_setFreqFloor(freqfloor); return true; }
+	if (id == OptionIds::ampfloor) { ampfloor = (double)value; if (initialised) analyzer_setAmpFloor(ampfloor); return true; }
+	if (id == OptionIds::sidelobes) { sidelobes = (double)value; if (initialised) analyzer_setSidelobeLevel(sidelobes); return true; }
 	if (id == OptionIds::freqdrift) { freqdrift = (double)value;
         return true; }
-	if (id == OptionIds::hoptime) { hoptime = (double)value; analyzer_setHopTime(hoptime); return true; }
-	if (id == OptionIds::croptime) { croptime = (double)value; analyzer_setCropTime(croptime); return true; }
-	if (id == OptionIds::bwregionwidth) { bwregionwidth = (double)value; analyzer_setBwRegionWidth(bwregionwidth); return true; }
+	if (id == OptionIds::hoptime) { hoptime = (double)value; if (initialised) analyzer_setHopTime(hoptime); return true; }
+	if (id == OptionIds::croptime) { croptime = (double)value; if (initialised) analyzer_setCropTime(croptime); return true; }
+	if (id == OptionIds::bwregionwidth) { bwregionwidth = (double)value; if (initialised) analyzer_setBwRegionWidth(bwregionwidth); return true; }
 	if (id == OptionIds::enablecache) { enablecache = (bool)value; return true; }
 	if (id == OptionIds::windowwidth) { windowwidth = (double)value; }
 	if (id == OptionIds::windowwidth) { windowwidth = (double)value; }

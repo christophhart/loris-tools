@@ -93,7 +93,14 @@ bool LorisState::analyse(const juce::File& audioFile, double rootFrequency)
 	//analyzer_setWindowWidth(rootFrequency * currentOption.windowwidth);
     analyzer_setFreqDrift(rootFrequency * 0.25);
 
-	currentOption.initLorisParameters();
+	if (!currentOption.initialised)
+	{
+		currentOption.initLorisParameters();
+		currentOption.initialised = true;
+	}
+
+	analyzer_setHopTime(currentOption.hoptime);
+	analyzer_setCropTime(currentOption.croptime);
 
 	if (juce::ScopedPointer<juce::AudioFormatReader> r = m.createReaderFor(audioFile))
 	{

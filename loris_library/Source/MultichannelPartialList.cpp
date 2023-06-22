@@ -347,7 +347,10 @@ void MultichannelPartialList::prepareToMorph(bool removeUnlabeled)
     
     for(auto p: list)
     {
-        LinearEnvelope* env = createF0Estimate(p, rootFrequency * (1.0 + options.freqdrift), rootFrequency / (1.0 + options.freqdrift), options.hoptime * 10.0);
+		auto l = std::pow(2.0, -1.0 * options.freqdrift / 1200.0);
+		auto h = std::pow(2.0, options.freqdrift / 1200.0);
+
+        LinearEnvelope* env = createF0Estimate(p, rootFrequency * l, rootFrequency * h, options.hoptime * 10.0);
         
         channelize(p, env, 1);
         destroyLinearEnvelope(env);
@@ -458,13 +461,13 @@ juce::AudioSampleBuffer MultichannelPartialList::renderEnvelope(const juce::Iden
 
 bool MultichannelPartialList::createSnapshot(const juce::Identifier &parameter, double timeSeconds, double *buffer, int& numChannels, int &numHarmonics)
 {
-    auto timeToUse = convertSecondsToTime(timeSeconds);
+    auto timeToUse = convertTimeToSeconds(timeSeconds);
     
     numChannels = getNumChannels();
     
     
     
-    prepareToMorph();
+    prepareToMorph(true);
     
     std::function<double(Partial*, double)> vf;
     
@@ -484,13 +487,16 @@ bool MultichannelPartialList::createSnapshot(const juce::Identifier &parameter, 
     for(auto& pl: list)
         numMaxHarmonics = jmax<int>(numMaxHarmonics, pl->size());
     
-    for(auto& pl: list)
+     for(auto& pl: list)
     {
         int thisNum = 0;
         
-        for(auto& p: *pl)
-            *buffer++ = vf(&p, timeToUse);
-        
+		for (auto& p : *pl)
+		{
+			*buffer++ = vf(&p, timeToUse);
+			thisNum++;
+		}
+            
         for(int i = thisNum; i < numMaxHarmonics; i++)
             *buffer++ = 0.0f;
     }
