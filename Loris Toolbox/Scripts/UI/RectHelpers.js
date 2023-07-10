@@ -13,6 +13,11 @@ namespace Rect
 		return [ area[0], area[1], area[2], area[3]];
 	}
 	
+	inline function getCentre(area)
+	{
+		return [area[0] + area[2]/2, area[1] + area[3]/2];
+	}
+	
 	inline function contains(area, point)
 	{
 		return point[0] >= area[0] && 

@@ -104,12 +104,6 @@ DLL_EXPORT bool loris_create_envelope(void* state, const char* file, const char*
 */
 DLL_EXPORT bool loris_snapshot(void* state, const char* file, double time, const char* parameter, double* buffer, int& numChannels, int& numHarmonics);
 
-#if LATER
-/** Sets a pointer to a progress value that will be updated inside the process call. Make sure to reset this to nullptr before the target object is destroyed!
-*/
-DLL_EXPORT void setProgressCounter(void* state, double* progress);
-#endif
-
 /** Prepares an audio file for morphing. If removeUnlabeled is true, then all non-labeled partials will be removed. */
 DLL_EXPORT bool loris_prepare(void* state, const char* file, bool removeUnlabeled);
 
@@ -118,5 +112,8 @@ DLL_EXPORT bool getLastMessage(void* state, char* buffer, int maxlen);
 DLL_EXPORT void getIdList(char* buffer, int maxlen, bool getOptions);
 
 DLL_EXPORT const char* getLastError(void* state);
+
+DLL_EXPORT void setThreadController(void* state, void* t);
+
 
 } // extern "C"

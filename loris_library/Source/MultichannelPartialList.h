@@ -106,7 +106,7 @@ struct MultichannelPartialList
     /** @internal */
 	void saveAsOriginal();
 
-    void prepareToMorph(bool removeUnlabeled=false);
+    bool prepareToMorph(bool removeUnlabeled=false);
     
 private:
 

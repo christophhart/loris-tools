@@ -656,9 +656,16 @@ Analyzer::analyze( const double * bufBegin, const double * bufEnd, double srate,
         //  loop over short-time analysis frames:
         while ( winMiddle < bufEnd )
         {
+			
+
             //  compute the time of this analysis frame:
             const double currentFrameTime = long(winMiddle - bufBegin) / srate;
             
+			const double totalLength = (double)(bufEnd - bufBegin) / srate;
+
+			if (threadController != nullptr && !threadController->setProgress(currentFrameTime / totalLength))
+				throw Exception("cancelled");
+
             //  compute reassigned spectrum:
             //  sampsBegin is the position of the first sample to be transformed,
             //  sampsEnd is the position after the last sample to be transformed.

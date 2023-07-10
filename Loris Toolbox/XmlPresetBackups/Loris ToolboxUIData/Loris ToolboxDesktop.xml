@@ -6,57 +6,49 @@
              textColour="4294967295" itemColour2="4280690214" locked="1">
     <Component type="ScriptPanel" id="ResynthesisePage" x="0.0" y="50.0" width="880.0"
                height="330.0" parentComponent="BG" bgColour="0" itemColour="0"
-               itemColour2="0" textColour="0" borderSize="0.0" borderRadius="0.0">
+               itemColour2="0" textColour="0" borderSize="0.0" borderRadius="0.0"
+               visible="0">
       <Component type="ScriptSlider" id="ConfigSlider1" x="61.0" y="222.0" parentComponent="ResynthesisePage"
                  showTextBox="0" style="Horizontal" width="130.0" height="22.0"
                  itemColour="4290279467" text="Window Width" mode="NormalizedPercentage"
-                 middlePosition="1.0" min="0.5" max="2.0" suffix=" st" defaultValue="1.0"
-                 saveInPreset="0"/>
+                 middlePosition="1.0" min="0.5" max="2.0" suffix=" st" defaultValue="1.0"/>
       <Component type="ScriptSlider" id="ConfigSlider2" x="220.0" y="222.0" parentComponent="ResynthesisePage"
                  showTextBox="0" style="Horizontal" width="130.0" height="22.0"
                  itemColour="4290279467" text="Side lobes" mode="Decibel" stepSize="1.0"
-                 middlePosition="-60.0" min="-100.0" max="0.0" suffix=" dB" defaultValue="-100.0"
-                 saveInPreset="0"/>
+                 middlePosition="-60.0" min="-100.0" max="0.0" suffix=" dB" defaultValue="-100.0"/>
       <Component type="ScriptSlider" id="ConfigSlider3" x="61.0" y="250.0" parentComponent="ResynthesisePage"
                  showTextBox="0" style="Horizontal" width="130.0" height="22.0"
                  itemColour="4290279467" text="Amp Floor" mode="Decibel" stepSize="1.0"
-                 middlePosition="-60.0" min="-100.0" max="-40.0" suffix=" dB"
-                 saveInPreset="0"/>
+                 middlePosition="-60.0" min="-100.0" max="-40.0" suffix=" dB"/>
       <Component type="ScriptSlider" id="ConfigSlider4" x="220.0" y="250.0" parentComponent="ResynthesisePage"
                  showTextBox="0" style="Horizontal" width="130.0" height="22.0"
                  itemColour="4290279467" text="Freq Floor" mode="Frequency" middlePosition="100.0"
-                 min="20.0" max="2000.0" suffix=" Hz" saveInPreset="0"/>
+                 min="20.0" max="2000.0" suffix=" Hz"/>
       <Component type="ScriptSlider" id="ConfigSlider5" x="61.0" y="278.0" parentComponent="ResynthesisePage"
                  showTextBox="0" style="Horizontal" width="130.0" height="22.0"
                  itemColour="4290279467" text="Hop Time" mode="NormalizedPercentage"
-                 middlePosition="1.0" min="0.5" max="2.0" suffix=" st" defaultValue="1.0"
-                 saveInPreset="0"/>
+                 middlePosition="1.0" min="0.5" max="2.0" suffix=" st" defaultValue="1.0"/>
       <Component type="ScriptSlider" id="ConfigSlider6" x="220.0" y="278.0" parentComponent="ResynthesisePage"
                  showTextBox="0" style="Horizontal" width="130.0" height="22.0"
                  itemColour="4290279467" text="Freq Tolerance" mode="NormalizedPercentage"
-                 middlePosition="0.75" suffix=" st" min="0.5" saveInPreset="0"/>
+                 middlePosition="0.75" suffix=" st" min="0.5"/>
     </Component>
     <Component type="ScriptPanel" id="PitchLockPage" x="0.0" y="50.0" width="880.0"
                height="320.0" parentComponent="BG" bgColour="0" itemColour="0"
-               itemColour2="0" textColour="0" borderSize="0.0" borderRadius="0.0"
-               visible="0">
+               itemColour2="0" textColour="0" borderSize="0.0" borderRadius="0.0">
       <Component type="ScriptSlider" id="PitchLockAmount" x="220.0" y="222.0"
                  parentComponent="PitchLockPage" showTextBox="0" style="Horizontal"
                  width="130.0" height="22.0" itemColour="4278422015" text="Pitch Lock"
-                 mode="NormalizedPercentage" suffix="%" middlePosition="0.5" saveInPreset="0"/>
+                 mode="NormalizedPercentage" suffix="%" middlePosition="0.5"/>
       <Component type="ScriptSlider" id="PitchShift" x="220.0" y="250.0" parentComponent="PitchLockPage"
                  showTextBox="0" style="Horizontal" width="130.0" height="22.0"
                  itemColour="4278422015" text="Pitch Shift" stepSize="1.0" middlePosition="0.0"
-                 min="-12.0" max="12.0" suffix=" st" saveInPreset="0"/>
+                 min="-12.0" max="12.0" suffix=" st"/>
       <Component type="ScriptSlider" id="NoiseGain" x="220.0" y="278.0" parentComponent="PitchLockPage"
                  showTextBox="0" style="Horizontal" width="130.0" height="22.0"
                  itemColour="4278422015" text="Noise Gain" mode="Decibel" suffix=" dB"
-                 middlePosition="0.0" min="-100.0" max="36.0" stepSize="0.1000000014901161"
-                 saveInPreset="0"/>
-      <Component type="ScriptSlider" id="PitchShift1" x="330.0" y="480.0" parentComponent="PitchLockPage"
-                 showTextBox="0" style="Horizontal" width="130.0" height="22.0"
-                 itemColour="4278422015" text="Pitch Shift" stepSize="1.0" middlePosition="0.0"
-                 min="-12.0" max="12.0" suffix=" st" saveInPreset="0"/>
+                 middlePosition="0.0" min="-100.0" max="36.0" stepSize="0.1000000014901161"/>
+      <Component type="ScriptButton" id="Automate Pitch" x="79.0" y="239.0" parentComponent="PitchLockPage"/>
     </Component>
     <Component type="ScriptPanel" id="LoopBuilderPage" x="0.0" y="40.0" width="880.0"
                height="340.0" parentComponent="BG" bgColour="0" itemColour="0"
@@ -69,7 +61,7 @@
       <Component type="ScriptSliderPack" id="Harmonics" x="20.0" y="232.0" width="319.0"
                  height="75.0" parentComponent="LoopBuilderPage" sliderAmount="32.0"
                  bgColour="1193879849" itemColour="1470653651" itemColour2="16777215"
-                 textColour="268435455" saveInPreset="0" tooltip="Set the gain attenuation for each harmonic"/>
+                 textColour="268435455" tooltip="Set the gain attenuation for each harmonic"/>
     </Component>
     <Component type="ScriptPanel" id="DilatePage" x="0.0" y="41.0" width="880.0"
                height="330.0" parentComponent="BG" bgColour="0" itemColour="0"
@@ -78,11 +70,12 @@
       <Component type="ScriptSlider" id="DilateScaleSlider" x="61.0" y="259.0"
                  parentComponent="DilatePage" showTextBox="0" width="290.0" height="22.0"
                  itemColour="4283466867" text="Scale Duration" middlePosition="1.0"
-                 min="0.25" max="4.0" suffix=" %" saveInPreset="0" defaultValue="1.0"
-                 mode="NormalizedPercentage" style="Horizontal" tooltip="The total duration scale (timestretch ratio)."/>
+                 min="0.25" max="4.0" suffix=" %" defaultValue="1.0" mode="NormalizedPercentage"
+                 style="Horizontal" tooltip="The total duration scale (timestretch ratio)."/>
       <Component type="ScriptPanel" id="Ruler" x="10.0" y="20.0" width="850.0"
                  height="170" allowCallbacks="All Callbacks" parentComponent="DilatePage"
-                 tooltip="Use this ruler to distort the timeline for the dilation process"/>
+                 tooltip="Use this ruler to distort the timeline for the dilation process"
+                 saveInPreset="1"/>
     </Component>
     <Component type="ScriptAudioWaveform" id="OriginalWaveform" x="10.0" y="383.0"
                width="850.0" height="130.0" bgColour="5592405" processorId="Original"
@@ -90,39 +83,42 @@
                enableRange="0" parentComponent="BG" saveInPreset="0" tooltip="The original audio file. Click to play"/>
     <Component type="ScriptPanel" id="PreviewPanel" x="10.0" y="98.0" width="850.0"
                height="130.0" parentComponent="BG" tooltip="The preview of the resynthesized audio file. Click to play."
-               allowCallbacks="Clicks &amp; Hover" itemColour="4290279467"/>
+               allowCallbacks="Clicks &amp; Hover" itemColour="4278422015"/>
     <Component type="ScriptFloatingTile" id="Tooltips" x="2.0" y="573.0" parentComponent="BG"
                ContentType="TooltipPanel" bgColour="3684408" itemColour="872415231"
                itemColour2="0" textColour="3439329279" height="24.0" width="790.0"
                Font="Lato"/>
     <Component type="ScriptFloatingTile" id="MasterPeak" x="879.0" y="41.0"
-               width="20.0" height="530.0" ContentType="MatrixPeakMeter" bgColour="4281545523"
-               itemColour="4287137928" itemColour2="4282400832" Data="{&#10;  &quot;ProcessorId&quot;: &quot;Loris Toolbox&quot;,&#10;  &quot;Index&quot;: -1,&#10;  &quot;FollowWorkspace&quot;: false,&#10;  &quot;SegmentLedSize&quot;: 2.0,&#10;  &quot;UpDecayTime&quot;: 0.0,&#10;  &quot;DownDecayTime&quot;: 1100.0,&#10;  &quot;UseSourceChannels&quot;: true,&#10;  &quot;SkewFactor&quot;: 0.3499999940395355,&#10;  &quot;PaddingSize&quot;: 1.0,&#10;  &quot;ShowMaxPeak&quot;: 1.0,&#10;  &quot;ChannelIndexes&quot;: [&#10;    0,&#10;    1&#10;  ]&#10;}"
+               width="20.0" height="530.0" ContentType="MatrixPeakMeter" bgColour="4278190080"
+               itemColour="4283782485" itemColour2="4280427042" Data="{&#10;  &quot;ProcessorId&quot;: &quot;Loris Toolbox&quot;,&#10;  &quot;Index&quot;: -1,&#10;  &quot;FollowWorkspace&quot;: false,&#10;  &quot;SegmentLedSize&quot;: 2.0,&#10;  &quot;UpDecayTime&quot;: 0.0,&#10;  &quot;DownDecayTime&quot;: 1100.0,&#10;  &quot;UseSourceChannels&quot;: true,&#10;  &quot;SkewFactor&quot;: 0.3499999940395355,&#10;  &quot;PaddingSize&quot;: 1.0,&#10;  &quot;ShowMaxPeak&quot;: 1.0,&#10;  &quot;ChannelIndexes&quot;: [&#10;    0,&#10;    1&#10;  ]&#10;}"
                parentComponent="BG"/>
     <Component type="ScriptPanel" id="ZoomPanel" x="876" y="576" width="24"
                height="24" allowCallbacks="All Callbacks" parentComponent="BG"/>
     <Component type="ScriptButton" id="PageButton1" x="5" y="5" text="RESYNTHESIZE"
                width="130" itemColour="4290279467" radioGroup="9000" parentComponent="BG"
-               saveInPreset="0" tooltip="Test the resynthesize algorithm with different parameters."/>
+               saveInPreset="0" tooltip="Test the resynthesize algorithm with different parameters."
+               enableMidiLearn="0"/>
     <Component type="ScriptButton" id="PageButton2" x="140" y="5" text="PITCHLOCK"
                width="110" itemColour="4278422015" radioGroup="9000" parentComponent="BG"
-               saveInPreset="0" tooltip="Flatten the pitch of the sample to the given root note."/>
+               saveInPreset="0" tooltip="Flatten the pitch of the sample to the given root note."
+               enableMidiLearn="0"/>
     <Component type="ScriptButton" id="PageButton3" x="255" y="5" text="SPECTRAL"
                width="125" itemColour="4286655160" radioGroup="9000" parentComponent="BG"
-               saveInPreset="0" tooltip="Change the harmonic spectrum of the sample."/>
+               saveInPreset="0" tooltip="Change the harmonic spectrum of the sample."
+               enableMidiLearn="0"/>
     <Component type="ScriptButton" id="PageButton4" x="385" y="5" text="DILATE"
                width="85" itemColour="4283466867" radioGroup="9000" parentComponent="BG"
-               saveInPreset="0" tooltip="Distort the timeline of the sample."/>
+               saveInPreset="0" tooltip="Distort the timeline of the sample."
+               enableMidiLearn="0"/>
     <Component type="ScriptButton" id="RetainNoiseButton" x="530.0" y="269.0"
                width="110.0" height="20.0" parentComponent="BG" text="Preserve Noise"
-               tooltip="Add the noise component from the original sound to the resynthesised sound"
-               saveInPreset="0"/>
+               tooltip="Add the noise component from the original sound to the resynthesised sound"/>
     <Component type="ScriptComboBox" id="ExampleLoad" x="10.0" y="532.0" parentComponent="BG"
                saveInPreset="0" height="20.0" items="Custom&#10;cello.wav&#10;cello_short.wav&#10;cymbal.wav&#10;deep_piano.wav&#10;flute staccato.wav&#10;flute.wav&#10;musicbox.aiff&#10;piano 2.wav&#10;rhodes.wav&#10;trumpet 2.wav&#10;trumpet.wav&#10;vibraphone.wav&#10;violin.aiff"
                tooltip="Select one of the embedded example files." text="Select Example"
                max="14"/>
     <Component type="ScriptComboBox" id="RootNote" x="150.0" y="532.0" parentComponent="BG"
-               height="20.0" width="58.0" saveInPreset="0" tooltip="Set the root note for the sample."
+               height="20.0" width="58.0" tooltip="Set the root note for the sample."
                items="&#10;C-2&#10;C#-2&#10;D-2&#10;D#-2&#10;E-2&#10;F-2&#10;F#-2&#10;G-2&#10;G#-2&#10;A-2&#10;A#-2&#10;B-2&#10;C-1&#10;C#-1&#10;D-1&#10;D#-1&#10;E-1&#10;F-1&#10;F#-1&#10;G-1&#10;G#-1&#10;A-1&#10;A#-1&#10;B-1&#10;C0&#10;C#0&#10;D0&#10;D#0&#10;E0&#10;F0&#10;F#0&#10;G0&#10;G#0&#10;A0&#10;A#0&#10;B0&#10;C1&#10;C#1&#10;D1&#10;D#1&#10;E1&#10;F1&#10;F#1&#10;G1&#10;G#1&#10;A1&#10;A#1&#10;B1&#10;C2&#10;C#2&#10;D2&#10;D#2&#10;E2&#10;F2&#10;F#2&#10;G2&#10;G#2&#10;A2&#10;A#2&#10;B2&#10;C3&#10;C#3&#10;D3&#10;D#3&#10;E3&#10;F3&#10;F#3&#10;G3&#10;G#3&#10;A3&#10;A#3&#10;B3&#10;C4&#10;C#4&#10;D4&#10;D#4&#10;E4&#10;F4&#10;F#4&#10;G4&#10;G#4&#10;A4&#10;A#4&#10;B4&#10;C5&#10;C#5&#10;D5&#10;D#5&#10;E5&#10;F5&#10;F#5&#10;G5&#10;G#5&#10;A5&#10;A#5&#10;B5&#10;C6&#10;C#6&#10;D6&#10;D#6&#10;E6&#10;F6&#10;F#6&#10;G6&#10;G#6&#10;A6&#10;A#6&#10;B6&#10;C7&#10;C#7&#10;D7&#10;D#7&#10;E7&#10;F7&#10;F#7&#10;G7&#10;G#7&#10;A7&#10;A#7&#10;B7&#10;C8&#10;C#8&#10;D8&#10;D#8&#10;E8&#10;F8&#10;F#8"
                max="127"/>
     <Component type="ScriptButton" id="DetectPitchButton" x="211.0" y="532.0"
@@ -137,43 +133,46 @@
     <Component type="ScriptPanel" id="ProgressPanel" x="370.0" y="240.0" width="130.0"
                height="130.0" parentComponent="BG"/>
     <Component type="ScriptButton" id="RefreshButton" x="390.0" y="260.0" parentComponent="BG"
-               width="90.0" height="90.0" textColour="4290279467" tooltip="Resynthesise the audio file with the current parameters."
+               width="90.0" height="90.0" textColour="4278422015" tooltip="Resynthesise the audio file with the current parameters."
                isMomentary="1" saveInPreset="0" text="refresh"/>
     <Component type="ScriptButton" id="PreviewDiffButton" x="530.0" y="329.0"
                width="109.0" height="20.0" parentComponent="BG" text="Solo Noise"
-               tooltip="Previews the difference of the resynthesised and the original version"
-               saveInPreset="0"/>
+               tooltip="Previews the difference of the resynthesised and the original version"/>
     <Component type="ScriptButton" id="SettingsButton" x="869.0" y="9.0" width="24.0"
-               height="24.0" parentComponent="BG" text="settings"/>
+               height="24.0" parentComponent="BG" text="settings" itemColour="4294967295"/>
   </Component>
   <Component type="ScriptSlider" id="NoiseAmount" x="535.0" y="301.0" width="100.0"
-             height="22.0" style="Horizontal" showTextBox="0" text="Volume"
-             mode="Decibel" min="-100.0" max="0.0" stepSize="0.1000000014901161"
-             suffix=" dB" middlePosition="-18.0" itemColour="1728053247" saveInPreset="0"/>
+             height="22.0" style="Horizontal" text="Volume" mode="Decibel"
+             min="-100.0" max="0.0" stepSize="0.1000000014901161" suffix=" dB"
+             middlePosition="-18.0" itemColour="1728053247" showTextBox="0"/>
   <Component type="ScriptButton" id="SaveButton" x="834.0" y="293.0" width="24.0"
              height="24.0" saveInPreset="0" enableMidiLearn="0" text="save"
-             itemColour="4290279467"/>
+             itemColour="4278422015"/>
   <Component type="ScriptLabel" id="SuffixLabel" x="721.0" y="295.0" height="20.0"
              width="108.0" alignment="left" bgColour="318767104" textColour="2751463423"
-             fontName="Lato" fontStyle="Bold" text="_low" tooltip="The suffix that will be appended to the filename on save."
-             fontSize="12.0"/>
-  <Component type="ScriptPanel" id="SettingsPopup" x="602.0" y="42.0" itemColour="3256885280"
-             itemColour2="4280887593" borderSize="1.0" borderRadius="3.0"
-             height="280.0" width="270.0" visible="0">
-    <Component type="ScriptFloatingTile" id="SettingsTile" x="12.0" y="8.0"
+             fontName="Lato" fontStyle="Bold" text="_noise" tooltip="The suffix that will be appended to the filename on save."
+             fontSize="12.0" saveInPreset="1"/>
+  <Component type="ScriptPanel" id="SettingsPopup" x="262.0" y="42.0" itemColour="3793756192"
+             itemColour2="3793756192" borderSize="1.0" borderRadius="3.0"
+             height="280.0" width="610.0" visible="0">
+    <Component type="ScriptFloatingTile" id="SettingsTile" x="317.0" y="13.0"
                ContentType="CustomSettings" bgColour="4278190080" itemColour="0"
                itemColour2="0" Data="{&#10;  &quot;Driver&quot;: true,&#10;  &quot;Device&quot;: true,&#10;  &quot;Output&quot;: true,&#10;  &quot;BufferSize&quot;: true,&#10;  &quot;SampleRate&quot;: true,&#10;  &quot;GlobalBPM&quot;: false,&#10;  &quot;StreamingMode&quot;: false,&#10;  &quot;ScaleFactor&quot;: true,&#10;  &quot;VoiceAmountMultiplier&quot;: false,&#10;  &quot;ClearMidiCC&quot;: false,&#10;  &quot;SampleLocation&quot;: false,&#10;  &quot;DebugMode&quot;: false,&#10;  &quot;UseOpenGL&quot;: false,&#10;  &quot;ScaleFactorList&quot;: [&#10;    0.5,&#10;    0.75,&#10;    1.0,&#10;    1.25,&#10;    1.5,&#10;    2.0&#10;  ]&#10;}"
                width="284.0" height="254.0" Font="Lato" FontSize="12.0" parentComponent="SettingsPopup"/>
+    <Component type="ScriptFloatingTile" id="PresetBrowser" x="8.0" y="8.0"
+               parentComponent="SettingsPopup" ContentType="PresetBrowser" bgColour="0"
+               itemColour="4294967295" itemColour2="0" Data="{&#10;  &quot;ShowSaveButton&quot;: true,&#10;  &quot;ShowExpansionsAsColumn&quot;: false,&#10;  &quot;ShowFolderButton&quot;: false,&#10;  &quot;ShowNotes&quot;: false,&#10;  &quot;ShowEditButtons&quot;: true,&#10;  &quot;EditButtonOffset&quot;: 10,&#10;  &quot;ShowAddButton&quot;: true,&#10;  &quot;ShowRenameButton&quot;: true,&#10;  &quot;ShowDeleteButton&quot;: true,&#10;  &quot;ShowFavoriteIcon&quot;: false,&#10;  &quot;ButtonsInsideBorder&quot;: false,&#10;  &quot;NumColumns&quot;: 1,&#10;  &quot;ColumnWidthRatio&quot;: [&#10;    0.3333333333333333,&#10;    0.3333333333333333,&#10;    0.3333333333333333&#10;  ],&#10;  &quot;ListAreaOffset&quot;: [&#10;    0,&#10;    0,&#10;    0,&#10;    0&#10;  ],&#10;  &quot;ColumnRowPadding&quot;: [&#10;    0,&#10;    0,&#10;    0,&#10;    0&#10;  ],&#10;  &quot;SearchBarBounds&quot;: [&#10;    5,&#10;    8,&#10;    230,&#10;    28&#10;  ],&#10;  &quot;MoreButtonBounds&quot;: [],&#10;  &quot;SaveButtonBounds&quot;: [],&#10;  &quot;FavoriteButtonBounds&quot;: []&#10;}"
+               width="332.0" height="267.0"/>
   </Component>
   <Component type="ScriptButton" id="DirectoryButton" x="670.0" y="330.0"
              width="190.0" height="20.0" isMomentary="1" tooltip="Set the output directory for the synthesised files"
-             text="C:\Users\chris\Desktop"/>
+             text="D:\Development\Projekte\wavetabletest\Samples\jaw_m"/>
   <Component type="ScriptComboBox" id="SampleMapList" x="341.0" y="533.0"
-             max="2" height="20.0" items="piano_trumpet_vibra&#10;violin_musicbox"
-             width="188.0" saveInPreset="0" visible="0"/>
+             max="5" height="20.0" items="LYRE&#10;growl_bass&#10;jaw_harp&#10;piano_trumpet_vibra&#10;violin_musicbox"
+             width="188.0" visible="0"/>
   <Component type="ScriptButton" id="UseSampleMaps" x="731.0" y="533.0" text="Use SampleMaps"
-             height="20.0" saveInPreset="0"/>
+             height="20.0"/>
   <Component type="ScriptComboBox" id="SampleSelection" x="534.0" y="533.0"
-             height="20.0" items="All Samples&#10;{PROJECT_FOLDER}musicbox.aiff&#10;{PROJECT_FOLDER}violin.aiff"
-             width="188.0" saveInPreset="0" max="3" visible="0"/>
+             height="20.0" items="All Samples&#10;{PROJECT_FOLDER}dorian_test/Temp Samples for Christoph/Lyre/LYR_60_101_127_MID.wav&#10;{PROJECT_FOLDER}dorian_test/Temp Samples for Christoph/Lyre/LYR_62_101_127_MID.wav&#10;{PROJECT_FOLDER}dorian_test/Temp Samples for Christoph/Lyre/LYR_64_101_127_MID.wav&#10;{PROJECT_FOLDER}dorian_test/Temp Samples for Christoph/Lyre/LYR_66_101_127_MID.wav&#10;{PROJECT_FOLDER}dorian_test/Temp Samples for Christoph/Lyre/LYR_68_101_127_MID.wav&#10;{PROJECT_FOLDER}dorian_test/Temp Samples for Christoph/Lyre/LYR_70_101_127_MID.wav&#10;{PROJECT_FOLDER}dorian_test/Temp Samples for Christoph/Lyre/LYR_72_101_127_MID.wav&#10;{PROJECT_FOLDER}dorian_test/Temp Samples for Christoph/Lyre/LYR_74_101_127_MID.wav&#10;{PROJECT_FOLDER}dorian_test/Temp Samples for Christoph/Lyre/LYR_76_101_127_MID.wav&#10;{PROJECT_FOLDER}dorian_test/Temp Samples for Christoph/Lyre/LYR_78_101_127_MID.wav&#10;{PROJECT_FOLDER}dorian_test/Temp Samples for Christoph/Lyre/LYR_80_101_127_MID.wav&#10;{PROJECT_FOLDER}dorian_test/Temp Samples for Christoph/Lyre/LYR_82_101_127_MID.wav&#10;{PROJECT_FOLDER}dorian_test/Temp Samples for Christoph/Lyre/LYR_84_101_127_MID.wav&#10;{PROJECT_FOLDER}dorian_test/Temp Samples for Christoph/Lyre/LYR_86_101_127_MID.wav&#10;{PROJECT_FOLDER}dorian_test/Temp Samples for Christoph/Lyre/LYR_88_101_127_MID.wav&#10;{PROJECT_FOLDER}dorian_test/Temp Samples for Christoph/Lyre/LYR_90_101_127_MID.wav"
+             width="188.0" saveInPreset="0" max="17" visible="0"/>
 </ContentProperties>

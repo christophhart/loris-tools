@@ -17,6 +17,7 @@
 #include "Helpers.h"
 #include "LorisState.h"
 
+
 namespace loris2hise
 {
 
@@ -60,7 +61,7 @@ void Options::initLorisParameters()
 	ampfloor = analyzer_getAmpFloor();
 	sidelobes = analyzer_getSidelobeLevel();
 	bwregionwidth = analyzer_getBwRegionWidth();
-	windowwidth = analyzer_getWindowWidth();
+	windowwidth = 1.0;
 	enablecache = false;
 }
 
@@ -89,8 +90,7 @@ bool Options::update(const juce::Identifier& id, const juce::var& value)
 	if (id == OptionIds::croptime) { croptime = (double)value; if (initialised) analyzer_setCropTime(croptime); return true; }
 	if (id == OptionIds::bwregionwidth) { bwregionwidth = (double)value; if (initialised) analyzer_setBwRegionWidth(bwregionwidth); return true; }
 	if (id == OptionIds::enablecache) { enablecache = (bool)value; return true; }
-	if (id == OptionIds::windowwidth) { windowwidth = (double)value; }
-	if (id == OptionIds::windowwidth) { windowwidth = (double)value; }
+	if (id == OptionIds::windowwidth) { windowwidth = jlimit(0.125, 4.0, (double)value); return true;  }
 
 	throw juce::Result::fail("Invalid option: " + id.toString());
 }

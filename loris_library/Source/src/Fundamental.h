@@ -36,6 +36,7 @@
  *
  */
 
+#include "../ThreadController.h"
 #include "LinearEnvelope.h"
 #include "PartialList.h"
 #include "F0Estimate.h" 
@@ -699,7 +700,7 @@ public:
                                lowerFreqBound, upperFreqBound );
     }
 
-
+	hise::ThreadController* controller = nullptr;
 
 //  -- private auxiliary functions --
 

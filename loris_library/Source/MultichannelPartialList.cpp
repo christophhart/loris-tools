@@ -16,6 +16,7 @@
  */
 
 #include "MultichannelPartialList.h"
+#include "src/Resampler.h"
 
 namespace loris2hise {
 using namespace juce;
@@ -338,39 +339,112 @@ juce::AudioSampleBuffer MultichannelPartialList::synthesize()
 	return output;
 }
 
-void MultichannelPartialList::prepareToMorph(bool removeUnlabeled)
+bool MultichannelPartialList::prepareToMorph(bool removeUnlabeled)
 {
     if(preparedForMorph)
-        return;
+        return true;
     
     Helpers::logMessage("Prepare partial list for morphing");
     
-    for(auto p: list)
-    {
-		auto l = std::pow(2.0, -1.0 * options.freqdrift / 1200.0);
-		auto h = std::pow(2.0, options.freqdrift / 1200.0);
+	if (auto s = hise::ThreadController::ScopedStepScaler(options.threadController, 0, 5))
+	{
+		for (auto p : list)
+		{
+			if (auto s2 = hise::ThreadController::ScopedStepScaler(options.threadController, list.indexOf(p), list.size()))
+			{
+				auto l = std::pow(2.0, -1.0 * options.freqdrift / 1200.0);
+				auto h = std::pow(2.0, options.freqdrift / 1200.0);
 
-        LinearEnvelope* env = createF0Estimate(p, rootFrequency * l, rootFrequency * h, options.hoptime * 10.0);
-        
-        channelize(p, env, 1);
-        destroyLinearEnvelope(env);
-    }
-        
-    for(auto p: list)
-    {
-        collate(p);
-        
-        
-        sift(p);
-        distill(p);
-        
-        if(removeUnlabeled)
-            removeLabeled(p, 0);
-        
-        sortByLabel(p);
-    }
+				LinearEnvelope* env;
+
+				{
+					hise::ThreadController::ScopedRangeScaler s(options.threadController, 0.0, 0.5);
+					env = createF0Estimate(p, rootFrequency * l, rootFrequency * h, options.hoptime * 10.0, options.threadController);
+				}
+				
+
+				{
+					hise::ThreadController::ScopedRangeScaler s(options.threadController, 0.5, 1.0);
+					channelize(p, env, 1);
+				}
+				
+				destroyLinearEnvelope(env);
+			}
+			
+		}
+	}
+
     
-    preparedForMorph = true;
+
+	if (auto s = hise::ThreadController::ScopedRangeScaler(options.threadController, 0.5, 1.0))
+	{
+		int idx = 0;
+		int length = list.size();
+
+		for (auto p : list)
+		{
+			if (auto ls = hise::ThreadController::ScopedStepScaler(options.threadController, idx++, length))
+			{
+				hise::ThreadController::ScopedStepScaler(options.threadController, 0, 5);
+				collate(p);
+
+				if (!options.threadController)
+					return false;
+
+				hise::ThreadController::ScopedStepScaler(options.threadController, 1, 5);
+				sortByLabel(p);
+
+				if (!options.threadController)
+					return false;
+
+				hise::ThreadController::ScopedStepScaler(options.threadController, 2, 5);
+				sift(p);
+
+				if (!options.threadController)
+					return false;
+
+				hise::ThreadController::ScopedStepScaler(options.threadController, 3, 5);
+				distill(p);
+
+				if (!options.threadController)
+					return false;
+
+				if (removeUnlabeled)
+					removeLabeled(p, 0);
+
+				if (!options.threadController)
+					return false;
+
+				hise::ThreadController::ScopedStepScaler(options.threadController, 4, 5);
+				sortByLabel(p);
+
+				if (!options.threadController)
+					return false;
+
+				//  better to compute this only once:
+				const double OneOverSrate = 1. / sampleRate;
+
+				//  use a Resampler to quantize the Breakpoint times and 
+				//  correct the phases:
+				Loris::Resampler quantizer(options.hoptime);
+				quantizer.setPhaseCorrect(true);
+
+				for (auto& pr : *p)
+				{
+					if (!options.threadController)
+						return false;
+
+					quantizer.quantize(pr);
+				}
+			}
+		}
+
+		preparedForMorph = true;
+		return true;
+	}
+	else
+		return false;
+		
 }
 
 juce::AudioSampleBuffer MultichannelPartialList::renderEnvelope(const juce::Identifier &parameter, int partialIndex)
@@ -391,7 +465,7 @@ juce::AudioSampleBuffer MultichannelPartialList::renderEnvelope(const juce::Iden
         {
             const var hoptimeSamples = options.hoptime * sampleRate;
             
-            LinearEnvelope* env = createF0Estimate(pl, rootFrequency * (1.0 + options.freqdrift), rootFrequency / (1.0 + options.freqdrift), options.hoptime * 4.0);
+            LinearEnvelope* env = createF0Estimate(pl, rootFrequency * (1.0 + options.freqdrift), rootFrequency / (1.0 + options.freqdrift), options.hoptime * 4.0, options.threadController);
             
             for(int i = 0; i < b.getNumSamples(); i++)
                 b.setSample(c, i, linearEnvelope_valueAt(env, i / sampleRate) / rootFrequency);
@@ -465,10 +539,13 @@ bool MultichannelPartialList::createSnapshot(const juce::Identifier &parameter, 
     
     numChannels = getNumChannels();
     
-    
-    
-    prepareToMorph(true);
-    
+	if (auto s = hise::ThreadController::ScopedRangeScaler(options.threadController, 0.0, 0.5))
+	{
+		prepareToMorph(true);
+	}
+	
+	hise::ThreadController::ScopedRangeScaler s2(options.threadController, 0.5, 1.0);
+
     std::function<double(Partial*, double)> vf;
     
     if(parameter == ParameterIds::phase)
@@ -484,21 +561,44 @@ bool MultichannelPartialList::createSnapshot(const juce::Identifier &parameter, 
     
     int numMaxHarmonics = 0;
     
-    for(auto& pl: list)
-        numMaxHarmonics = jmax<int>(numMaxHarmonics, pl->size());
+	for (auto& pl : list)
+	{
+		for (const auto& part : *pl)
+		{
+			numMaxHarmonics = jmax(numMaxHarmonics, part.label()-1);
+		}
+	}
+
+	FloatVectorOperations::clear(buffer, numMaxHarmonics);
     
-     for(auto& pl: list)
+	int channelOffset = 0;
+    
+	int idx = 0;
+	int length = (double)list.size();
+
+	auto tc = options.threadController;
+
+    for(auto& pl: list)
     {
         int thisNum = 0;
-        
-		for (auto& p : *pl)
+
+		if (auto s = hise::ThreadController::ScopedStepScaler(tc, idx++, length))
 		{
-			*buffer++ = vf(&p, timeToUse);
-			thisNum++;
+			for (auto& p : *pl)
+			{
+				auto labelIndex = p.label() - 1;
+
+				if (tc != nullptr)
+					tc->setProgress((double)labelIndex / (double)numMaxHarmonics);
+
+				jassert(isPositiveAndBelow(labelIndex, numMaxHarmonics + 1));
+				buffer[channelOffset + labelIndex] = vf(&p, timeToUse);
+			}
+
+			channelOffset += numMaxHarmonics;
 		}
-            
-        for(int i = thisNum; i < numMaxHarmonics; i++)
-            *buffer++ = 0.0f;
+		else
+			return false;
     }
     
     numHarmonics = numMaxHarmonics;

@@ -257,3 +257,12 @@ const char* getLastError(void* state)
 }
 
 }
+
+DLL_EXPORT void setThreadController(void* state, void* t)
+{
+	if (auto typed = ((loris2hise::LorisState*)state))
+	{
+		if(auto tc = static_cast<hise::ThreadController*>(t))
+			typed->setThreadController(tc);
+	}
+}

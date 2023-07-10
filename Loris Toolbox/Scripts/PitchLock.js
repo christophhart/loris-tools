@@ -1,6 +1,12 @@
 
 namespace PitchLock
 {
+	const var AutomatePitch = Content.getComponent("Automate Pitch");
+	
+	AutomatePitch.setLocalLookAndFeel(Manifest.defaultLaf);
+	
+	
+
 	// UI Setup
 
 	const var PitchLockSliders = [Content.getComponent("PitchLockAmount"),

@@ -89,9 +89,11 @@ bool LorisState::analyse(const juce::File& audioFile, double rootFrequency)
 
     auto driftFactor = std::pow(2.0, currentOption.freqdrift / 1200.0);
     
-	analyzer_configure(rootFrequency * 0.8, rootFrequency);
+	analyzer_configure(rootFrequency * 0.8, rootFrequency * currentOption.windowwidth, currentOption.threadController);
 	//analyzer_setWindowWidth(rootFrequency * currentOption.windowwidth);
     analyzer_setFreqDrift(rootFrequency * 0.25);
+
+	analyzer_storeNoBandwidth();
 
 	if (!currentOption.initialised)
 	{
@@ -121,15 +123,18 @@ bool LorisState::analyse(const juce::File& audioFile, double rootFrequency)
 
 		for (int c = 0; c < bf.getNumChannels(); c++)
 		{
-			for (int i = 0; i < bf.getNumSamples(); i++)
+			if (auto s = hise::ThreadController::ScopedStepScaler(currentOption.threadController, c, bf.getNumChannels()))
 			{
-				buffer[i] = bf.getSample(c, i);
+				if (!s)
+					return false;
+
+				for (int i = 0; i < bf.getNumSamples(); i++)
+					buffer[i] = bf.getSample(c, i);
+
+				auto list = newEntry->get(c);
+
+				analyze(buffer, bf.getNumSamples(), r->sampleRate, list);
 			}
-
-			auto list = newEntry->get(c);
-
-			analyze(buffer, bf.getNumSamples(), r->sampleRate, list);
-
 		}
 
 		newEntry->saveAsOriginal();

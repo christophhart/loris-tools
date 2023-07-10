@@ -17,8 +17,12 @@
 
 #pragma once
 
+
+
+
 #include "src/loris.h"
 
+#include "ThreadController.h"
 #include "src/Breakpoint.h"
 #include "src/PartialUtils.h"
 
@@ -27,6 +31,8 @@
 namespace loris2hise
 {
 using namespace juce;
+
+
 
 
 enum class TimeDomainType
@@ -93,7 +99,11 @@ struct Options
 
 	/** If this is true, it will also call the loris_setXXX methods. */
 	bool initialised = false;
+
+	hise::ThreadController* threadController = nullptr;
 };
+
+
 
 /** This struct will be used as argument for the custom function. */
 struct CustomFunctionArgs

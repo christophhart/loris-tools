@@ -69,6 +69,11 @@ struct LorisState
         return {};
     }
     
+	void setThreadController(hise::ThreadController* tc)
+	{
+		currentOption.threadController = tc;
+	}
+
 private:
 
     friend class Helpers;

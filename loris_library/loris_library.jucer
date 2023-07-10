@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <JUCERPROJECT id="VQBfaP" name="loris_library" projectType="dll" useAppConfig="0"
-              addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1" version="0.2.1"
+              addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1" version="0.2.2"
               companyName="HISE" companyWebsite="https://hise.dev/">
   <MAINGROUP id="UOFjeC" name="loris_library">
     <GROUP id="{64C9039F-91E3-D640-65BD-62DB920A6560}" name="Source">

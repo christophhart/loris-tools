@@ -217,10 +217,25 @@ namespace LorisProcessor
 		if(!Manifest.SaveButton.getValue())
 			return;
 
+		local suffixToUse = suffix;
+
+		if(PitchLock.AutomatePitch.getValue())
+		{
+			Console.print(rootNote.getValue());
+
+			local thisRoot = rootNote.getValue() + parseInt(PitchLock.PitchLockSliders[1].getValue());
+
+			Console.print(suffixToUse);
+
+			suffixToUse += "_" + Engine.getMidiNoteName(thisRoot);
+			
+			
+		}
+
 		local sr = CURRENT_FILE.loadAudioMetadata().SampleRate;
 		local prefix = CURRENT_FILE.toString(CURRENT_FILE.NoExtension);		
 		local ext = CURRENT_FILE.toString(CURRENT_FILE.Extension);
-		local target = outputDirectory.getChildFile(prefix + suffix + ext);
+		local target = outputDirectory.getChildFile(prefix + suffixToUse + ext);
 		
 		target.writeAudioFile(data, sr, 24);
 		
@@ -265,7 +280,7 @@ namespace LorisProcessor
 			
 			originalTone = lorisManager.synthesise(CURRENT_FILE);
 			
-			saveBuffer(originalTone, "_tone");
+			//saveBuffer(originalTone, "_tone");
 			
 			if(isMultichannel)
 			{
@@ -279,7 +294,7 @@ namespace LorisProcessor
 				original -= originalTone[0];
 			}
 			
-			saveBuffer(original, "_noise");
+			//saveBuffer(original, "_noise");
 		}
 		
 		worker.setStatusMessage("Processing...");
@@ -378,6 +393,9 @@ namespace LorisProcessor
 
 		if(ALL_SAMPLES_MODE)
 		{
+			Console.print("ALL SAMPLES");
+			
+
 			for(s in CURRENT_SAMPLE_LIST)
 			{
 				OriginalWatcher.CURRENT_NOTE = s.get(Sampler1.Root);
@@ -389,7 +407,19 @@ namespace LorisProcessor
 		}
 		else
 		{
-			rebuildFile(CURRENT_FILE);	
+			if(PitchLock.AutomatePitch.getValue())
+			{
+				for(i = -12; i <= 12; i++)
+				{
+					PitchLock.PitchLockSliders[1].setValue(i);
+					PitchLock.PitchLockSliders[1].changed();
+					rebuildFile(CURRENT_FILE);
+				}
+			}
+			else
+			{
+				rebuildFile(CURRENT_FILE);	
+			}
 		}
 
 		PENDING = false;		

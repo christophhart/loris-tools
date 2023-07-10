@@ -10,8 +10,28 @@
                    NumDisplayBuffers="1">
           <ChildProcessors/>
           <Content>
+            <Control type="ScriptSlider" id="ConfigSlider1" value="1.0"/>
+            <Control type="ScriptSlider" id="ConfigSlider2" value="-63.0"/>
+            <Control type="ScriptSlider" id="ConfigSlider3" value="0.0"/>
+            <Control type="ScriptSlider" id="ConfigSlider4" value="79.55999755859375"/>
+            <Control type="ScriptSlider" id="ConfigSlider5" value="1.0"/>
+            <Control type="ScriptSlider" id="ConfigSlider6" value="1.0"/>
+            <Control type="ScriptSlider" id="PitchLockAmount" value="1.0"/>
+            <Control type="ScriptSlider" id="PitchShift" value="12"/>
+            <Control type="ScriptSlider" id="NoiseGain" value="-100.0"/>
+            <Control type="ScriptButton" id="Automate Pitch" value="0.0"/>
+            <Control type="ScriptSliderPack" id="Harmonics" value="27.0" data="128....f+XlYl6yv0ipO...f9rGEt3yiBWeOrGEt8vdT31C6QgaOov0i8zLyL0iBWOROJb8H8nv0iziBWOROMyLS8jBWO1iBWOZOJb8n8nv0i1iBWOZOov0i8jBWO1iBWOROOJb87nv0iviBWOBO..........................."/>
+            <Control type="ScriptSlider" id="DilateScaleSlider" value="1.0"/>
+            <Control type="ScriptPanel" id="Ruler" value="0.0"/>
+            <Control type="ScriptButton" id="RetainNoiseButton" value="1.0"/>
+            <Control type="ScriptComboBox" id="RootNote" value="40.0"/>
+            <Control type="ScriptButton" id="PreviewDiffButton" value="1.0"/>
             <Control type="ScriptButton" id="SettingsButton" value="0.0"/>
+            <Control type="ScriptSlider" id="NoiseAmount" value="-6.799998760223389"/>
+            <Control type="ScriptLabel" id="SuffixLabel" value="_noise"/>
             <Control type="ScriptButton" id="DirectoryButton" value="0.0"/>
+            <Control type="ScriptComboBox" id="SampleMapList" value="1.0"/>
+            <Control type="ScriptButton" id="UseSampleMaps" value="0.0"/>
           </Content>
           <UIData Source="Loris ToolboxUIData"/>
         </Processor>
@@ -26,11 +46,11 @@
     <Processor Type="EffectChain" ID="FX" Bypassed="0">
       <ChildProcessors/>
     </Processor>
-    <Processor Type="AudioLooper" ID="Original" Bypassed="1" Gain="1.0" Balance="0.0"
+    <Processor Type="AudioLooper" ID="Original" Bypassed="0" Gain="1.0" Balance="0.0"
                VoiceLimit="256.0" KillFadeTime="20.0" IconColour="0" SyncMode="1.0"
                PitchTracking="0.0" LoopEnabled="0.0" RootNote="64.0" SampleStartMod="0.0"
-               Reversed="0.0" FileName="{PROJECT_FOLDER}sound_examples/musicbox.aiff"
-               min="0" max="168000" loopStart="0" loopEnd="168000">
+               Reversed="0.0" FileName="D:\Development\Projekte\wavetabletest\Samples\dorian_test\Temp Samples for Christoph\Jaw Harp\jawharp_CLOSE_15.wav"
+               min="0" max="157038" loopStart="0" loopEnd="157038">
       <ChildProcessors>
         <Processor Type="MidiProcessorChain" ID="Midi Processor" Bypassed="0">
           <ChildProcessors/>
@@ -91,14 +111,14 @@
       </ChildProcessors>
       <RoutingMatrix NumSourceChannels="2" Channel0="0" Send0="-1" Channel1="1" Send1="-1"/>
     </Processor>
-    <Processor Type="StreamingSampler" ID="Sampler1" Bypassed="0" Gain="1.0"
+    <Processor Type="StreamingSampler" ID="Sampler1" Bypassed="1" Gain="1.0"
                Balance="0.0" VoiceLimit="256.0" KillFadeTime="20.0" IconColour="0"
                PreloadSize="8192.0" BufferSize="4096.0" VoiceAmount="256.0"
                SamplerRepeatMode="3.0" RRGroupAmount="1.0" PitchTracking="1.0"
                OneShot="0.0" CrossfadeGroups="0.0" Purged="0.0" Reversed="0.0"
                NumChannels="1" UseStaticMatrix="0.0" Group0Table="" Group1Table=""
                Group2Table="" Group3Table="" Group4Table="" Group5Table="" Group6Table=""
-               Group7Table="" SampleMapID="violin_musicbox">
+               Group7Table="" SampleMapID="LYRE">
       <ChildProcessors>
         <Processor Type="MidiProcessorChain" ID="Midi Processor" Bypassed="0">
           <ChildProcessors/>

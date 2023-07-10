@@ -97,7 +97,7 @@ static Analyzer * ptr_instance = 0;
    	any of the other analyzer operations can be performed.   
  */
 extern "C"
-void analyzer_configure( double resolution, double windowWidth )
+void analyzer_configure( double resolution, double windowWidth, void* tc)
 {
 	try 
 	{
@@ -111,6 +111,12 @@ void analyzer_configure( double resolution, double windowWidth )
          debugger << "configuring Analyzer" << endl;         
          ptr_instance->configure( resolution, windowWidth );
       }
+
+	  if (tc != nullptr)
+	  {
+		  ptr_instance->threadController = static_cast<hise::ThreadController*>(tc);
+	  }
+	  
 	}
 	catch( Exception & ex ) 
 	{

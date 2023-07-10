@@ -189,17 +189,27 @@ namespace Manifest
 	exampleLoad.setControlCallback(onExampleLoad);
 	
 	
-	
+	const var ON_COLOUR = 0x33000000;
+	const var OFF_COLOUR = 0x11000000;
 	
 	const var pageButtonLaf = Content.createLocalLookAndFeel();
 	
 	pageButtonLaf.registerFunction("drawToggleButton", function(g, obj)
 	{
-		g.setColour(0x22000000);
-		g.fillRoundedRectangle(obj.area, obj.area[3]/2);
-		g.setColour(obj.textColour);
+		g.setColour(ON_COLOUR);
 		
 		var circle = Rect.removeFromLeft(obj.area, obj.area[3]);
+		
+		g.fillRoundedRectangle(circle, { "CornerSize": obj.area[3]/2, "Rounded": [true, false, true, false]});
+		
+		g.setColour(OFF_COLOUR);
+		
+		g.fillRoundedRectangle(obj.area, { "CornerSize": obj.area[3]/2, "Rounded": [false, true, false, true]});
+		
+		g.setColour(obj.textColour);
+		
+		
+		
 		
 		var alpha = 0.3;
 		if(obj.over)
@@ -216,6 +226,7 @@ namespace Manifest
 		
 		g.setColour(Colours.withAlpha(Colours.white, alpha));
 		
+		Rect.removeFromLeft(obj.area, 10);
 		
 		g.setFontWithSpacing(obj.value ? "Lato Bold" : "Lato", 12.0, 0.05);
 		g.drawAlignedText(obj.text, obj.area, "left");
@@ -229,9 +240,24 @@ namespace Manifest
 		"tags": ["page-handling"]
 	});
 	
+	const var pageStates = [false, false, false, false];
 	
+	const var pageStateBroadcaster = Engine.createBroadcaster({
+		"id": "pageStateBroadcaster",
+		"tags": ["page-handling"],
+		"args": ["component", "event"]
+	});
 	
-	
+	pageStateBroadcaster.addListener(pageStates, "update page states", function (component, event)
+	{
+		if(event.clicked)
+		{
+			var idx = component.get("id").getTrailingIntValue();
+			Console.print(idx-1);
+			this[idx] = !this[idx];
+			//component.set("bgCo")
+		}
+	});
 	
 	inline function initPageButtons()
 	{
@@ -256,6 +282,8 @@ namespace Manifest
 			x += d.width + 5;
 			pageButtons.push(b);
 		}
+		
+		pageStateBroadcaster.attachToComponentMouseEvents(pageButtons, "Clicks Only", "");
 		
 		pageBroadcaster.attachToRadioGroup(9000, "page group");
 	}

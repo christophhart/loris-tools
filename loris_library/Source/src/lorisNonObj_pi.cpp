@@ -267,7 +267,7 @@ createFreqReference( PartialList * partials, double minFreq, double maxFreq,
 extern "C"
 LinearEnvelope * 
 createF0Estimate( PartialList * partials, double minFreq, double maxFreq, 
-                  double interval )
+                  double interval, void* threadController)
 {
 	try 
 	{
@@ -276,6 +276,7 @@ createF0Estimate( PartialList * partials, double minFreq, double maxFreq,
         const double Precision = 0.1;
         const double Confidence = 0.9;
         FundamentalFromPartials est( Precision );
+		est.controller = static_cast<hise::ThreadController*>(threadController);
         
         std::pair< double, double > span = 
             PartialUtils::timeSpan( partials->begin(), partials->end() );

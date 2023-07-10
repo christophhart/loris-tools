@@ -48,7 +48,7 @@
  * http://www.cerlsoundgroup.org/Loris/
  *
  */
- 
+
 /* ---------------------------------------------------------------- */
 /*      Version
 /*
@@ -136,7 +136,7 @@ void analyze( const double * buffer, unsigned int bufferSize,
     PartialList.                                                 
  */
                        
-void analyzer_configure( double resolution, double windowWidth );
+void analyzer_configure( double resolution, double windowWidth, void* tc);
 /*  Configure the sole Analyzer instance with the specified
     frequency resolution (minimum instantaneous frequency    
     difference between Partials). All other Analyzer parameters     
@@ -550,7 +550,7 @@ createFreqReference( PartialList * partials,
  
 LinearEnvelope * 
 createF0Estimate( PartialList * partials, double minFreq, double maxFreq, 
-                  double interval );
+                  double interval, void* threadController);
 /* Return a newly-constructed LinearEnvelope that estimates
    the time-varying fundamental frequency of the sound
    represented by the Partials in a PartialList. This uses

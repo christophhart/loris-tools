@@ -599,9 +599,14 @@ FundamentalFromPartials::buildEnvelope( PartialList::const_iterator begin_partia
     
     std::vector< double > amplitudes, frequencies;
 
+	
+
     double time = tbeg;
     while ( time < tend )
     {
+		if (!controller->setProgress((time - tbeg) / (tend - tbeg)))
+			return env;
+
         collectFreqsAndAmps( begin_partials, end_partials, frequencies, amplitudes, time );
                   
         if (! amplitudes.empty() )

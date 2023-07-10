@@ -34,6 +34,7 @@
  */
 #include <memory>
 #include <vector>
+#include "../ThreadController.h"
 #include "LinearEnvelope.h"
 #include "Partial.h"
 #include "PartialList.h"
@@ -514,6 +515,8 @@ public:
     void buildFundamentalEnv( bool TF = true ) { TF = TF; }
 
 //  -- private member variables --
+
+	hise::ThreadController* threadController = nullptr;
 
 private:
 
