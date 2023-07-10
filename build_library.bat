@@ -6,8 +6,7 @@ SET /p versionPoint= < tmpFile
 
 echo Version %versionPoint%
 
-
-set projucer="D:\Development\HISE modules\tools\projucer\Projucer.exe"
+set projucer="C:\actions-runner\_work\HISE\HISE\tools\projucer\Projucer.exe"
 set zip_app="C:\Program Files\7-Zip\7z.exe"
 set compiler="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\MsBuild.exe"
 
